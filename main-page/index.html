@@ -34,21 +34,33 @@
                 <section class="card trend-card" aria-labelledby="trend-title" aria-describedby="trend-alt">
                     <div class="trend-top">
                         <div>
-                            <p class="trend-label">Tendencia de desempleo juvenil</p>
+                            <p class="trend-label">Tendencia de desempleo juvenil <span class="date-range">(1 - 13 Jun)</span></p>
                             <div class="trend-stats">
                                 <h2 id="trend-title">-2.4%</h2>
-                                <p class="trend-delta">↘Este mes</p>
+                                <p class="trend-delta" aria-label="Ha bajado este mes">↘Este mes</p>
                             </div>
                         </div>
-                        <span class="live-chip"><span class="live-dot"></span>DATOS EN VIVO</span>
+                        <div class="trend-actions">
+                            <span class="live-chip"><span class="live-dot"></span>DATOS EN VIVO</span>
+                            <button type="button" class="icon-button expand-chart-btn" aria-label="Ampliar gráfico" aria-expanded="false" style="align-self: flex-end; margin-top: 6px;">
+                                <i class="ph ph-arrows-out"></i>
+                            </button>
+                        </div>
                     </div>
 
-                    <div class="chart-wrap" aria-hidden="true">
-                        <svg viewBox="0 0 320 118" class="trend-chart" preserveAspectRatio="none">
+                    <div class="chart-wrap" role="group" aria-label="Gráfico interactivo de tendencia del desempleo">
+                        <svg viewBox="0 -10 320 138" class="trend-chart" preserveAspectRatio="none" style="overflow: visible;">
                             <path class="chart-fill" d="M0,96 C35,88 62,88 92,95 C128,103 146,88 172,64 C199,42 226,42 252,72 C273,96 293,106 320,47 L320,118 L0,118 Z" />
                             <path class="chart-line" d="M0,96 C35,88 62,88 92,95 C128,103 146,88 172,64 C199,42 226,42 252,72 C273,96 293,106 320,47" />
-                            <circle cx="320" cy="47" r="4" class="chart-point" />
+                            
+                            <!-- Puntos interactivos, accesibles por teclado (tabindex="0") -->
+                            <circle cx="0" cy="96" r="6" class="chart-point interactive" tabindex="0" aria-label="1 de Junio: 15.2%" data-date="1 Jun" data-value="15.2%"/>
+                            <circle cx="92" cy="95" r="6" class="chart-point interactive" tabindex="0" aria-label="3 de Junio: 15.0%" data-date="3 Jun" data-value="15.0%"/>
+                            <circle cx="172" cy="64" r="6" class="chart-point interactive" tabindex="0" aria-label="5 de Junio: 14.1%" data-date="5 Jun" data-value="14.1%"/>
+                            <circle cx="252" cy="72" r="6" class="chart-point interactive" tabindex="0" aria-label="10 de Junio: 14.5%" data-date="10 Jun" data-value="14.5%"/>
+                            <circle cx="320" cy="47" r="6" class="chart-point interactive" tabindex="0" aria-label="13 de Junio: 12.8%" data-date="13 Jun" data-value="12.8%"/>
                         </svg>
+                        <div class="chart-tooltip" role="tooltip" aria-hidden="true" id="chart-tooltip"></div>
                     </div>
 
                     <div class="chart-days" aria-hidden="true">
@@ -57,7 +69,7 @@
                         <span>VIE</span>
                         <span>DOM</span>
                     </div>
-                    <p id="trend-alt" class="sr-only">Resumen del gráfico: la tasa de desempleo juvenil muestra una bajada general del 2.4 por ciento durante esta semana, con una leve subida intermedia y cierre en su punto más bajo.</p>
+                    <p id="trend-alt" class="sr-only">Resumen del gráfico: la tasa de desempleo juvenil muestra una bajada general del 2.4 por ciento del 1 al 13 de junio, interactúa con el gráfico para ver datos detallados por día.</p>
                 </section>
 
                 <section class="facts" aria-labelledby="facts-title">
@@ -96,21 +108,21 @@
                         <button class="play-button" type="button" aria-label="Reproducir historia de Sarah" aria-describedby="story-access-note"><i class="ph-fill ph-play" aria-hidden="true"></i></button>
 
                         <div class="story-actions" aria-label="Interacciones de la historia">
-                            <button type="button" class="side-action" aria-label="Me gusta esta historia (12.4 mil)"><i class="ph ph-heart" aria-hidden="true"></i></button>
+                            <button type="button" class="side-action" aria-label="Me gusta esta historia" aria-pressed="false"><i class="ph ph-heart" aria-hidden="true"></i></button>
                             <span class="side-count">12.4k</span>
-                            <button type="button" class="side-action" aria-label="Ver comentarios (842)"><i class="ph ph-chat" aria-hidden="true"></i></button>
+                            <button type="button" class="side-action comments-trigger" aria-label="Ver comentarios" data-story="sarah"><i class="ph ph-chat" aria-hidden="true"></i></button>
                             <span class="side-count">842</span>
-                            <button type="button" class="side-action" aria-label="Guardar historia"><i class="ph ph-bookmark-simple" aria-hidden="true"></i></button>
+                            <button type="button" class="side-action" aria-label="Guardar historia" aria-pressed="false"><i class="ph ph-bookmark-simple" aria-hidden="true"></i></button>
                             <span class="side-count">2k</span>
                         </div>
 
                         <div class="story-info">
                             <h4>Cómo conseguí mi primer trabajo como desarrolladora usando IA.</h4>
-                            <p id="story-access-note" class="sr-only">Este contenido audiovisual dispone de una alternativa textual y resumen accesible.</p>
-                            <button class="story-alt-btn" type="button" id="open-media-alt" aria-haspopup="dialog" aria-controls="media-alt-panel">Leer transcripción y alternativas</button>
+                            <p id="story-access-note-1" class="sr-only">Este contenido audiovisual dispone de una alternativa textual y resumen accesible.</p>
+                            <button class="story-alt-btn" type="button" aria-haspopup="dialog" aria-controls="media-alt-panel">Leer transcripción y alternativas</button>
                             <div class="tags">
-                                <span>#CARRERA</span>
-                                <span>#AI</span>
+                                <span>#EMPLEO</span>
+                                <span>#IA</span>
                                 <span>#ODS8</span>
                             </div>
                         </div>
@@ -128,18 +140,18 @@
                         <button class="play-button" type="button" aria-label="Reproducir historia de Carlos" aria-describedby="story-access-note"><i class="ph-fill ph-play" aria-hidden="true"></i></button>
 
                         <div class="story-actions" aria-label="Interacciones de la historia">
-                            <button type="button" class="side-action" aria-label="Me gusta esta historia (8.2 mil)"><i class="ph ph-heart" aria-hidden="true"></i></button>
+                            <button type="button" class="side-action" aria-label="Me gusta esta historia" aria-pressed="false"><i class="ph ph-heart" aria-hidden="true"></i></button>
                             <span class="side-count">8.2k</span>
-                            <button type="button" class="side-action" aria-label="Ver comentarios (456)"><i class="ph ph-chat" aria-hidden="true"></i></button>
+                            <button type="button" class="side-action comments-trigger" aria-label="Ver comentarios" data-story="carlos"><i class="ph ph-chat" aria-hidden="true"></i></button>
                             <span class="side-count">456</span>
-                            <button type="button" class="side-action" aria-label="Guardar historia"><i class="ph ph-bookmark-simple" aria-hidden="true"></i></button>
+                            <button type="button" class="side-action" aria-label="Guardar historia" aria-pressed="false"><i class="ph ph-bookmark-simple" aria-hidden="true"></i></button>
                             <span class="side-count">1.3k</span>
                         </div>
 
                         <div class="story-info">
                             <h4>De la fábrica al desarrollo web: mi transición laboral a los 42 años.</h4>
-                            <p id="story-access-note" class="sr-only">Este contenido audiovisual dispone de una alternativa textual y resumen accesible.</p>
-                            <button class="story-alt-btn" type="button" id="open-media-alt" aria-haspopup="dialog" aria-controls="media-alt-panel">Leer transcripción y alternativas</button>
+                            <p id="story-access-note-2" class="sr-only">Este contenido audiovisual dispone de una alternativa textual y resumen accesible.</p>
+                            <button class="story-alt-btn" type="button" aria-haspopup="dialog" aria-controls="media-alt-panel">Leer transcripción y alternativas</button>
                             <div class="tags">
                                 <span>#FORMACIÓN</span>
                                 <span>#TRANSICIÓN</span>
@@ -160,18 +172,18 @@
                         <button class="play-button" type="button" aria-label="Reproducir historia de Lucía" aria-describedby="story-access-note"><i class="ph-fill ph-play" aria-hidden="true"></i></button>
 
                         <div class="story-actions" aria-label="Interacciones de la historia">
-                            <button type="button" class="side-action" aria-label="Me gusta esta historia (9.8 mil)"><i class="ph ph-heart" aria-hidden="true"></i></button>
+                            <button type="button" class="side-action" aria-label="Me gusta esta historia" aria-pressed="false"><i class="ph ph-heart" aria-hidden="true"></i></button>
                             <span class="side-count">9.8k</span>
-                            <button type="button" class="side-action" aria-label="Ver comentarios (672)"><i class="ph ph-chat" aria-hidden="true"></i></button>
+                            <button type="button" class="side-action comments-trigger" aria-label="Ver comentarios" data-story="lucia"><i class="ph ph-chat" aria-hidden="true"></i></button>
                             <span class="side-count">672</span>
-                            <button type="button" class="side-action" aria-label="Guardar historia"><i class="ph ph-bookmark-simple" aria-hidden="true"></i></button>
+                            <button type="button" class="side-action" aria-label="Guardar historia" aria-pressed="false"><i class="ph ph-bookmark-simple" aria-hidden="true"></i></button>
                             <span class="side-count">1.9k</span>
                         </div>
 
                         <div class="story-info">
                             <h4>Crear mi startup respetando los derechos de mis empleados fue rentable.</h4>
-                            <p id="story-access-note" class="sr-only">Este contenido audiovisual dispone de una alternativa textual y resumen accesible.</p>
-                            <button class="story-alt-btn" type="button" id="open-media-alt" aria-haspopup="dialog" aria-controls="media-alt-panel">Leer transcripción y alternativas</button>
+                            <p id="story-access-note-3" class="sr-only">Este contenido audiovisual dispone de una alternativa textual y resumen accesible.</p>
+                            <button class="story-alt-btn" type="button" aria-haspopup="dialog" aria-controls="media-alt-panel">Leer transcripción y alternativas</button>
                             <div class="tags">
                                 <span>#EMPRENDIMIENTO</span>
                                 <span>#DERECHOS</span>
@@ -183,28 +195,28 @@
 
                 <section class="challenge-banner" aria-label="Reto destacado">
                     <div>
-                        <h3>¿Lista para un reto?</h3>
+                        <h3>¿Te atreves con el reto?</h3>
                         <p>Demuestra tus habilidades en IA y consigue insignias.</p>
                     </div>
-                    <button class="quiz-btn" type="button">Hacer quiz</button>
+                    <button class="quiz-btn" type="button" aria-label="Comenzar el reto destacado">Comenzar reto</button>
                 </section>
             </main>
 
             <nav class="bottom-nav" aria-label="Principal">
                 <button class="nav-item active" type="button" aria-label="Inicio" aria-current="page">
-                    <span class="nav-icon" aria-hidden="true">⌂</span>
+                    <span class="nav-icon" aria-hidden="true"><i class="ph ph-house"></i></span>
                     <span class="nav-label">Inicio</span>
                 </button>
-                <a href="../actions and tools/index.html" class="nav-item" aria-label="Acción" style="text-decoration: none">
-                    <span class="nav-icon" aria-hidden="true">◎</span>
-                    <span class="nav-label">Acción</span>
+                <a href="../actions and tools/index.html" class="nav-item" aria-label="Aprende" style="text-decoration: none">
+                    <span class="nav-icon" aria-hidden="true"><i class="ph ph-book-open"></i></span>
+                    <span class="nav-label">Aprende</span>
                 </a>
                 <a href="../challenges/index.html" class="nav-item" aria-label="Retos" style="text-decoration: none">
-                    <span class="nav-icon" aria-hidden="true">◉</span>
+                    <span class="nav-icon" aria-hidden="true"><i class="ph ph-medal"></i></span>
                     <span class="nav-label">Retos</span>
                 </a>
                 <a href="../profile/index.html" class="nav-item" aria-label="Perfil" style="text-decoration: none">
-                    <span class="nav-icon" aria-hidden="true">☺</span>
+                    <span class="nav-icon" aria-hidden="true"><i class="ph ph-user"></i></span>
                     <span class="nav-label">Perfil</span>
                 </a>
             </nav>
@@ -215,32 +227,32 @@
             <div class="notif-card">
                 <div class="notif-header">
                     <h3>Notificaciones</h3>
-                    <button class="icon-button" type="button" id="notif-close" aria-label="Cerrar notificaciones">✕</button>
+                    <button class="icon-button" type="button" id="notif-close" aria-label="Cerrar notificaciones"><i class="ph ph-x" aria-hidden="true"></i></button>
                 </div>
                 <ul class="notif-list" role="list">
                     <li class="notif-item unread" role="listitem">
-                        <span class="notif-icon" aria-hidden="true">🏆</span>
+                        <span class="notif-icon" aria-hidden="true"><i class="ph-fill ph-trophy"></i></span>
                         <div class="notif-body">
                             <p class="notif-text">¡Nuevo reto semanal disponible! <strong>Green CEO</strong></p>
                             <p class="notif-time">Hace 2 horas</p>
                         </div>
                     </li>
                     <li class="notif-item" role="listitem">
-                        <span class="notif-icon" aria-hidden="true">⭐</span>
+                        <span class="notif-icon" aria-hidden="true"><i class="ph-fill ph-star"></i></span>
                         <div class="notif-body">
                             <p class="notif-text">Conseguiste la insignia <strong>Primera trivia</strong></p>
                             <p class="notif-time">Hace 1 día</p>
                         </div>
                     </li>
                     <li class="notif-item" role="listitem">
-                        <span class="notif-icon" aria-hidden="true">📢</span>
+                        <span class="notif-icon" aria-hidden="true"><i class="ph-fill ph-megaphone"></i></span>
                         <div class="notif-body">
                             <p class="notif-text">Tu amigo Alex también juega al ODS 8</p>
                             <p class="notif-time">Hace 3 días</p>
                         </div>
                     </li>
                     <li class="notif-item" role="listitem">
-                        <span class="notif-icon" aria-hidden="true">🎯</span>
+                        <span class="notif-icon" aria-hidden="true"><i class="ph-fill ph-target"></i></span>
                         <div class="notif-body">
                             <p class="notif-text">Completaste 3 trivias seguidas esta semana</p>
                             <p class="notif-time">Hace 5 días</p>
@@ -262,6 +274,47 @@
                     <p>"Antes me costaba conseguir entrevistas. Aprendí herramientas de IA para mejorar mi CV, preparar respuestas y practicar casos reales. En dos meses logré mi primer trabajo junior en desarrollo."</p>
                     <h4>Descripción de audio</h4>
                     <p>Se muestra a una joven profesional sonriendo en un entorno urbano. Sobre la imagen aparecen botones de reproducción, compartir y métricas de interacción social.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal de Comentarios -->
+        <div class="comments-panel" id="comments-panel" hidden role="dialog" aria-modal="true" aria-labelledby="comments-title">
+            <div class="comments-backdrop" id="comments-backdrop"></div>
+            <div class="comments-card" role="document">
+                <div class="comments-header">
+                    <h2 id="comments-title">Comentarios</h2>
+                    <button class="icon-button" type="button" id="comments-close" aria-label="Cerrar comentarios"><i class="ph ph-x" aria-hidden="true"></i></button>
+                </div>
+                <ul class="comments-list" role="list" id="comments-list">
+                    <li class="comment-item" role="listitem">
+                        <div class="comment-avatar" aria-hidden="true">👤</div>
+                        <div class="comment-body">
+                            <p class="comment-author">María López</p>
+                            <p class="comment-text">¡Excelente historia! Yo también estoy en transición laboral con IA. Gracias por compartir.</p>
+                            <p class="comment-time">Hace 2 horas</p>
+                        </div>
+                    </li>
+                    <li class="comment-item" role="listitem">
+                        <div class="comment-avatar" aria-hidden="true">👤</div>
+                        <div class="comment-body">
+                            <p class="comment-author">Juan García</p>
+                            <p class="comment-text">¿Qué herramientas de IA usaste principalmente? Me gustaría saber más.</p>
+                            <p class="comment-time">Hace 5 horas</p>
+                        </div>
+                    </li>
+                    <li class="comment-item" role="listitem">
+                        <div class="comment-avatar" aria-hidden="true">👤</div>
+                        <div class="comment-body">
+                            <p class="comment-author">Ana Rodríguez</p>
+                            <p class="comment-text">Inspirador. Muchas gracias por tu contribución al ODS 8.</p>
+                            <p class="comment-time">Hace 1 día</p>
+                        </div>
+                    </li>
+                </ul>
+                <div class="comments-input-area">
+                    <input type="text" id="new-comment-input" placeholder="Escribe un comentario..." aria-label="Campo para escribir nuevo comentario" />
+                    <button type="button" id="comment-submit-btn" aria-label="Enviar comentario"><i class="ph ph-paper-plane-tilt" aria-hidden="true"></i></button>
                 </div>
             </div>
         </div>

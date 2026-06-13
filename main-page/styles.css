@@ -44,10 +44,12 @@ body {
     background: var(--bg);
     border-radius: 34px;
     box-shadow: 0 26px 70px rgba(22, 24, 32, 0.18);
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
     position: relative;
+    max-height: 100vh;
 }
 
 .app-header {
@@ -140,7 +142,7 @@ body {
 }
 
 .content {
-    padding: 14px 16px 96px;
+    padding: 14px 16px 110px;
     display: flex;
     flex-direction: column;
     gap: 18px;
@@ -237,16 +239,99 @@ body {
     }
 }
 
+.trend-actions {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Modificador cuando se expande el gráfico */
+.trend-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease, z-index 0.3s ease;
+}
+
+.trend-card.expanded {
+    z-index: 20;
+    transform: scale(1.02);
+    box-shadow: 0 10px 30px rgba(22, 24, 32, 0.15);
+}
+
+.trend-card.expanded .chart-wrap {
+    height: 180px; /* Gráfico más grande al expandir */
+}
+
 .chart-wrap {
     border-radius: 12px;
-    overflow: hidden;
+    overflow: visible; /* Cambiado para mostrar puntos en los bordes y tooltips */
     background: #fff9f6;
+    position: relative;
+    height: 110px;
+    transition: height 0.3s ease;
 }
 
 .trend-chart {
     display: block;
     width: 100%;
-    height: 110px;
+    height: 100%;
+    overflow: visible;
+}
+
+.trend-card.expanded .trend-chart {
+    height: 100%;
+}
+
+.chart-point.interactive {
+    fill: var(--accent);
+    stroke: #fff;
+    stroke-width: 2;
+    cursor: pointer;
+    transition: r 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), stroke-width 0.2s;
+    opacity: 0; 
+}
+
+/* Solo se ven si el gráfico está ampliado o se hoveran */
+.trend-card.expanded .chart-point.interactive {
+    opacity: 1;
+}
+
+.chart-point.interactive:focus-visible,
+.chart-point.interactive:hover {
+    r: 10;
+    stroke-width: 3;
+    outline: none;
+    opacity: 1;
+}
+
+.chart-tooltip {
+    position: absolute;
+    background: var(--ink);
+    color: #ffffff;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: 'Space Grotesk', sans-serif;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    white-space: nowrap;
+    z-index: 100;
+    transform: translate(-50%, 10px); /* Empieza un poco más abajo para el efecto de fade-up */
+}
+
+.chart-tooltip.visible {
+    opacity: 1;
+    transform: translate(-50%, 0); 
+}
+
+.chart-tooltip::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 4px 4px 0 4px;
+    border-style: solid;
+    border-color: var(--ink) transparent transparent transparent;
 }
 
 .chart-fill {
@@ -718,6 +803,7 @@ body {
     grid-template-columns: repeat(4, 1fr);
     padding: 10px 0 12px;
     box-shadow: 0 -6px 20px rgba(22, 24, 32, 0.07);
+    z-index: 100;
 }
 
 .nav-item {
@@ -770,7 +856,7 @@ body {
     inset: 0;
     display: grid;
     place-items: center;
-    z-index: 25;
+    z-index: 1000;
 }
 
 .notif-panel[hidden] {
@@ -927,14 +1013,166 @@ body {
     color: var(--ink);
 }
 
+/* ── Panel de Comentarios ─────────────────────── */
+.comments-panel {
+    position: fixed;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    z-index: 999;
+}
+
+.comments-panel[hidden] {
+    display: none;
+}
+
+.comments-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(15, 17, 24, 0.48);
+    backdrop-filter: blur(3px);
+}
+
+.comments-card {
+    position: relative;
+    z-index: 1;
+    width: min(380px, 95vw);
+    height: min(70vh, 500px);
+    background: #fff;
+    border-radius: 22px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 26px 60px rgba(15, 17, 24, 0.3);
+}
+
+.comments-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding: 18px;
+    border-bottom: 1px solid #e6e8ee;
+}
+
+.comments-header h2 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.comments-list {
+    list-style: none;
+    padding: 12px 18px;
+    margin: 0;
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.comment-item {
+    display: flex;
+    gap: 10px;
+    padding: 12px;
+    background: #f9fafb;
+    border-radius: 12px;
+}
+
+.comment-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--accent-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 16px;
+}
+
+.comment-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.comment-author {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+}
+
+.comment-text {
+    margin: 0;
+    font-size: 13px;
+    color: var(--ink);
+    line-height: 1.4;
+}
+
+.comment-time {
+    margin: 0;
+    font-size: 11px;
+    color: var(--muted);
+}
+
+.comments-input-area {
+    display: flex;
+    gap: 8px;
+    padding: 12px 18px;
+    border-top: 1px solid #e6e8ee;
+    background: #fff;
+}
+
+#new-comment-input {
+    flex: 1;
+    border: 1px solid #e6e8ee;
+    border-radius: 999px;
+    padding: 8px 14px;
+    font-size: 14px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+#new-comment-input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(242, 101, 34, 0.1);
+}
+
+#comment-submit-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+#comment-submit-btn:hover {
+    background: var(--accent-dark);
+}
+
+#comment-submit-btn:active {
+    transform: scale(0.95);
+}
+
 .toast {
     position: fixed;
     left: 50%;
-    bottom: 24px;
+    bottom: 120px;
     transform: translateX(-50%);
     background: #1c1d26;
     color: #fff;
-    padding: 10px 14px;
+    padding: 12px 18px;
     border-radius: 999px;
     box-shadow: 0 18px 40px rgba(17, 19, 26, 0.35);
     opacity: 0;
@@ -942,7 +1180,9 @@ body {
     transition:
         opacity 0.3s ease,
         transform 0.3s ease;
-    z-index: 35;
+    z-index: 500;
+    font-size: 14px;
+    font-weight: 500;
 }
 
 .toast.show {

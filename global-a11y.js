@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
         banner.style.color = "#ffffff";
         banner.style.fontSize = "12px";
         banner.style.fontWeight = "600";
-        banner.style.zIndex = "999";
+        banner.style.zIndex = "9999";
         banner.style.pointerEvents = "none";
         banner.style.display = "none";
         document.body.appendChild(banner);
