@@ -9,7 +9,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Fraunces:wght@600;700&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="styles.css" />
-        <script src="https://unpkg.com/@phosphor-icons/web"></script>
+        <script src="https://unpkg.com/@phosphor-icons/web" async></script>
     </head>
 
     <body>
@@ -17,7 +17,7 @@
             <!-- Profile Header -->
             <header class="profile-header">
                 <div class="avatar-container">
-                    <img src="https://i.pravatar.cc/150?img=44" alt="Alex Harrison" class="avatar" />
+                    <img src="https://i.pravatar.cc/150?img=44" alt="Alex Harrison" class="avatar" id="profile-avatar" />
                     <button class="edit-btn" aria-label="Editar perfil">
                         <i class="ph-fill ph-pencil-simple"></i>
                     </button>
@@ -26,8 +26,13 @@
                     <h1>Alex Harrison</h1>
                     <p>Miembro desde julio de 2023</p>
                 </div>
+                <button class="icon-button" type="button" id="notif-bell" aria-label="Notificaciones" style="margin-left:auto;flex-shrink:0">
+                    <i class="ph ph-bell" aria-hidden="true"></i>
+                    <span class="notif-dot" aria-hidden="true"></span>
+                </button>
             </header>
 
+            <main class="content" id="main-content">
             <!-- Achievements -->
             <section class="achievements-section">
                 <div class="section-header">
@@ -74,8 +79,8 @@
                             <h4>Modo oscuro / claro</h4>
                             <p id="theme-mode-desc">Alterna entre tema oscuro y claro</p>
                         </div>
-                        <label class="toggle-switch">
-                            <input type="checkbox" id="high-contrast" />
+                        <label class="toggle-switch" for="high-contrast" aria-label="Modo oscuro / claro">
+                            <input type="checkbox" id="high-contrast" aria-label="Modo oscuro / claro" />
                             <span class="slider"></span>
                         </label>
                     </li>
@@ -87,8 +92,8 @@
                             <h4>Aumentar tamaño del texto <span class="setting-badge">RECOMENDADO</span></h4>
                             <p>Fuentes más grandes para leer mejor</p>
                         </div>
-                        <label class="toggle-switch">
-                            <input type="checkbox" id="large-text" />
+                        <label class="toggle-switch" for="large-text" aria-label="Aumentar tamaño del texto">
+                            <input type="checkbox" id="large-text" aria-label="Aumentar tamaño del texto" />
                             <span class="slider"></span>
                         </label>
                     </li>
@@ -100,8 +105,8 @@
                             <h4>Subtítulos</h4>
                             <p>Activar subtítulos en todos los vídeos</p>
                         </div>
-                        <label class="toggle-switch">
-                            <input type="checkbox" id="subtitles" />
+                        <label class="toggle-switch" for="subtitles" aria-label="Subtítulos">
+                            <input type="checkbox" id="subtitles" aria-label="Subtítulos" />
                             <span class="slider"></span>
                         </label>
                     </li>
@@ -113,8 +118,8 @@
                             <h4>Vibración táctil</h4>
                             <p>Respuesta háptica al interactuar</p>
                         </div>
-                        <label class="toggle-switch">
-                            <input type="checkbox" id="haptic" />
+                        <label class="toggle-switch" for="haptic" aria-label="Vibración táctil">
+                            <input type="checkbox" id="haptic" aria-label="Vibración táctil" />
                             <span class="slider"></span>
                         </label>
                     </li>
@@ -130,6 +135,15 @@
                 <i class="ph ph-caret-right text-light"></i>
             </button>
 
+            <!-- Customize Profile Color -->
+            <button type="button" class="action-card" id="customize-color-btn" aria-label="Personaliza tu color de perfil">
+                <div class="action-left">
+                    <i class="ph ph-palette"></i>
+                    <span>Personaliza tu color de perfil</span>
+                </div>
+                <i class="ph ph-caret-right text-light"></i>
+            </button>
+
             <!-- Sign Out -->
             <button type="button" class="action-card danger" id="sign-out-btn" aria-label="Cerrar sesión">
                 <div class="action-left">
@@ -137,23 +151,24 @@
                     <span>Cerrar sesión</span>
                 </div>
             </button>
+            </main>
 
             <nav class="bottom-nav" aria-label="Principal">
                 <a href="../main-page/index.html" class="nav-item" aria-label="Inicio" style="text-decoration: none">
-                    <span class="nav-icon" aria-hidden="true">⌂</span>
-                    <span class="nav-label" data-i18n="nav.home">Inicio</span>
+                    <span class="nav-icon" aria-hidden="true"><i class="ph ph-house"></i></span>
+                    <span class="nav-label">Inicio</span>
                 </a>
-                <a href="../actions and tools/index.html" class="nav-item" aria-label="Acción" style="text-decoration: none">
-                    <span class="nav-icon" aria-hidden="true">◎</span>
-                    <span class="nav-label" data-i18n="nav.action">Acción</span>
+                <a href="../actions and tools/index.html" class="nav-item" aria-label="Aprende" style="text-decoration: none">
+                    <span class="nav-icon" aria-hidden="true"><i class="ph ph-book-open"></i></span>
+                    <span class="nav-label">Aprende</span>
                 </a>
                 <a href="../challenges/index.html" class="nav-item" aria-label="Retos" style="text-decoration: none">
-                    <span class="nav-icon" aria-hidden="true">◉</span>
-                    <span class="nav-label" data-i18n="nav.challenges">Retos</span>
+                    <span class="nav-icon" aria-hidden="true"><i class="ph ph-medal"></i></span>
+                    <span class="nav-label">Retos</span>
                 </a>
                 <button class="nav-item active" type="button" aria-label="Perfil" aria-current="page">
-                    <span class="nav-icon" aria-hidden="true">☺</span>
-                    <span class="nav-label" data-i18n="nav.profile">Perfil</span>
+                    <span class="nav-icon" aria-hidden="true"><i class="ph ph-user"></i></span>
+                    <span class="nav-label">Perfil</span>
                 </button>
             </nav>
         </div>
@@ -206,39 +221,158 @@
         </div>
 
         <!-- Account Details Modal -->
+        <!-- Account Details Modal -->
         <div class="modal" id="account-modal" role="dialog" aria-modal="true" aria-labelledby="account-title" hidden>
             <div class="modal-backdrop" data-close="account"></div>
+
             <div class="modal-card" role="document">
                 <div class="modal-header">
                     <div>
                         <p class="eyebrow">Ajustes</p>
                         <h2 id="account-title">Detalles de la cuenta</h2>
                     </div>
-                    <button class="icon-button" type="button" aria-label="Cerrar" data-close="account">✕</button>
+
+                    <button class="icon-button" type="button" aria-label="Cerrar" data-close="account">
+                        <i class="ph ph-x" aria-hidden="true"></i>
+                    </button>
                 </div>
 
                 <div style="display: grid; gap: 16px; margin-top: 16px">
                     <div>
-                        <label class="eyebrow" style="display: block; margin-bottom: 6px">Nombre completo</label>
+                        <label for="account-name" class="eyebrow" style="display: block; margin-bottom: 6px">
+                            Nombre completo
+                        </label>
+
                         <input
+                            id="account-name"
                             type="text"
                             value="Alex Harrison"
+                            required
+                            aria-required="true"
+                            aria-describedby="account-name-error"
                             style="width: 100%; padding: 12px 14px; background: var(--gray-light); border: 1px solid var(--border-color); border-radius: 12px; font-family: inherit; font-size: 14px; color: var(--text-main)" />
+
+                        <p id="account-name-error" class="field-error" aria-live="polite"></p>
                     </div>
+
                     <div>
-                        <label class="eyebrow" style="display: block; margin-bottom: 6px">Correo electrónico</label>
+                        <label for="account-email" class="eyebrow" style="display: block; margin-bottom: 6px">
+                            Correo electrónico
+                        </label>
+
                         <input
+                            id="account-email"
                             type="email"
                             value="alex.harrison@example.com"
-                            style="width: 100%; padding: 12px 14px; background: var(--gray-light); border: 1px solid var(--border-color); border-radius: 12px; font-family: inherit; font-size: 14px; color: var(--text-main)" />
+                            readonly
+                            aria-readonly="true"
+                            aria-describedby="account-email-help account-email-error"
+                            style="width: 100%; padding: 12px 14px; background: var(--gray-light); border: 1px solid var(--border-color); border-radius: 12px; font-family: inherit; font-size: 14px; color: var(--text-main); opacity: 0.75; cursor: not-allowed" />
+
+                        <p id="account-email-help" class="field-help">
+                            El correo electrónico está asociado a la cuenta y no se puede modificar desde esta pantalla.
+                        </p>
+
+                        <p id="account-email-error" class="field-error" aria-live="polite"></p>
                     </div>
-                    <button class="cta" id="save-account-btn" style="width: 100%; justify-content: center; margin-top: 8px">Guardar cambios</button>
+
+                    <button type="button" class="cta" id="save-account-btn" style="width: 100%; justify-content: center; margin-top: 8px">
+                        Guardar cambios
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Color Picker Modal -->
+        <div class="modal" id="color-picker-modal" role="dialog" aria-modal="true" aria-labelledby="color-picker-title" hidden>
+            <div class="modal-backdrop" data-close></div>
+            <div class="modal-card" role="document">
+                <div class="modal-header">
+                    <h2 id="color-picker-title">Personaliza tu color de perfil</h2>
+                    <button class="icon-button" type="button" aria-label="Cerrar" data-close>✕</button>
+                </div>
+                <p class="modal-text">Selecciona un color para el borde de tu foto de perfil</p>
+                <div class="color-grid">
+                    <button class="color-option" data-color="#f26522" aria-label="Naranja" style="background-color: #f26522;">
+                        <i class="ph-fill ph-check"></i>
+                    </button>
+                    <button class="color-option" data-color="#3b82f6" aria-label="Azul" style="background-color: #3b82f6;">
+                        <i class="ph-fill ph-check"></i>
+                    </button>
+                    <button class="color-option" data-color="#10b981" aria-label="Verde" style="background-color: #10b981;">
+                        <i class="ph-fill ph-check"></i>
+                    </button>
+                    <button class="color-option" data-color="#ef4444" aria-label="Rojo" style="background-color: #ef4444;">
+                        <i class="ph-fill ph-check"></i>
+                    </button>
+                    <button class="color-option" data-color="#8b5cf6" aria-label="Morado" style="background-color: #8b5cf6;">
+                        <i class="ph-fill ph-check"></i>
+                    </button>
+                    <button class="color-option" data-color="#ec4899" aria-label="Rosa" style="background-color: #ec4899;">
+                        <i class="ph-fill ph-check"></i>
+                    </button>
+                    <button class="color-option" data-color="#f59e0b" aria-label="Amarillo" style="background-color: #f59e0b;">
+                        <i class="ph-fill ph-check"></i>
+                    </button>
+                    <button class="color-option" data-color="#06b6d4" aria-label="Cian" style="background-color: #06b6d4;">
+                        <i class="ph-fill ph-check"></i>
+                    </button>
+                    <button class="color-option" data-color="#6366f1" aria-label="Índigo" style="background-color: #6366f1;">
+                        <i class="ph-fill ph-check"></i>
+                    </button>
+                    <button class="color-option" data-color="#14b8a6" aria-label="Turquesa" style="background-color: #14b8a6;">
+                        <i class="ph-fill ph-check"></i>
+                    </button>
                 </div>
             </div>
         </div>
 
         <!-- Subtitles Mock Banner -->
         <div class="subtitles-banner" aria-live="polite">[Subtítulos activados] - Simulación de subtítulos activos.</div>
+
+        <!-- Toast -->
+        <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+        <!-- Panel de notificaciones -->
+        <div class="notif-panel" id="notif-panel" hidden role="dialog" aria-modal="true" aria-label="Notificaciones">
+            <div class="notif-backdrop" id="notif-backdrop"></div>
+            <div class="notif-card">
+                <div class="notif-header">
+                    <h3>Notificaciones</h3>
+                    <button class="icon-button" type="button" id="notif-close" aria-label="Cerrar notificaciones">✕</button>
+                </div>
+                <ul class="notif-list" role="list">
+                    <li class="notif-item unread" role="listitem">
+                        <span class="notif-icon" aria-hidden="true"><i class="ph-fill ph-trophy"></i></span>
+                        <div class="notif-body">
+                            <p class="notif-text">¡Nuevo reto semanal disponible! <strong>Green CEO</strong></p>
+                            <p class="notif-time">Hace 2 horas</p>
+                        </div>
+                    </li>
+                    <li class="notif-item" role="listitem">
+                        <span class="notif-icon" aria-hidden="true"><i class="ph-fill ph-star"></i></span>
+                        <div class="notif-body">
+                            <p class="notif-text">Conseguiste la insignia <strong>Primera trivia</strong></p>
+                            <p class="notif-time">Hace 1 día</p>
+                        </div>
+                    </li>
+                    <li class="notif-item" role="listitem">
+                        <span class="notif-icon" aria-hidden="true"><i class="ph-fill ph-megaphone"></i></span>
+                        <div class="notif-body">
+                            <p class="notif-text">Tu amigo Alex también juega al ODS 8</p>
+                            <p class="notif-time">Hace 3 días</p>
+                        </div>
+                    </li>
+                    <li class="notif-item" role="listitem">
+                        <span class="notif-icon" aria-hidden="true"><i class="ph-fill ph-target"></i></span>
+                        <div class="notif-body">
+                            <p class="notif-text">Completaste 3 trivias seguidas esta semana</p>
+                            <p class="notif-time">Hace 5 días</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
 
         <script src="../global-a11y.js"></script>
         <script src="script.js"></script>

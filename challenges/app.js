@@ -221,6 +221,7 @@ const xpButtons = document.querySelectorAll(".quickwin-xp[data-xp]");
 const questionTitle = document.getElementById("question-title");
 const quizCounter = document.getElementById("quiz-counter");
 const nextQuestionButton = document.getElementById("next-question");
+const prevQuestionButton = document.getElementById("prev-question");
 const quizCard = document.querySelector(".quiz");
 const weeklyModal = document.getElementById("weekly-modal");
 const modalCloseButtons = document.querySelectorAll("[data-close='true']");
@@ -240,7 +241,7 @@ const simClaim = document.getElementById("sim-claim");
 const simReset = document.getElementById("sim-reset");
 
 // Nuevos elementos
-const bellButton = document.querySelector('.icon-button[aria-label="Notificaciones"]');
+const bellButton = document.getElementById("notif-bell");
 const notifPanel = document.getElementById("notif-panel");
 const notifClose = document.getElementById("notif-close");
 const notifBackdrop = document.getElementById("notif-backdrop");
@@ -440,6 +441,12 @@ function renderWeeklyStep() {
         button.className = "step-choice";
         button.textContent = option.label;
         button.addEventListener("click", () => {
+            // Deshabilitar todos los botones inmediatamente para evitar doble click
+            simActions.querySelectorAll(".step-choice").forEach(b => {
+                b.disabled = true;
+            });
+            button.classList.add("selected");
+
             weeklyState.planet = clamp(weeklyState.planet + option.impact.planet);
             weeklyState.people = clamp(weeklyState.people + option.impact.people);
             weeklyState.profit = clamp(weeklyState.profit + option.impact.profit);
@@ -449,6 +456,7 @@ function renderWeeklyStep() {
             if (weeklyState.stepIndex >= weeklySteps.length) {
                 simStep.hidden = true;
                 simResult.hidden = false;
+                simClaim.hidden = false;
                 simSummary.textContent = "Has equilibrado los tres pilares con decisiones responsables.";
             } else {
                 renderWeeklyStep();
@@ -475,7 +483,7 @@ function openWeeklyModal() {
     weeklyState.profit = 50;
     simStep.hidden = false;
     simResult.hidden = true;
-    simClaim.hidden = false;
+    simClaim.hidden = true;
     if (isWeeklyLocked()) {
         simStep.hidden = true;
         simResult.hidden = false;
@@ -670,25 +678,8 @@ nextQuestionButton.addEventListener("click", () => {
     changeQuestion(1);
 });
 
-let swipeStartX = null;
-quizCard.addEventListener("pointerdown", (event) => {
-    swipeStartX = event.clientX;
-});
-
-quizCard.addEventListener("pointerup", (event) => {
-    if (swipeStartX === null) {
-        return;
-    }
-    const deltaX = event.clientX - swipeStartX;
-    swipeStartX = null;
-    if (Math.abs(deltaX) < 40) {
-        return;
-    }
-    if (deltaX < 0) {
-        changeQuestion(1);
-    } else {
-        changeQuestion(-1);
-    }
+prevQuestionButton.addEventListener("click", () => {
+    changeQuestion(-1);
 });
 
 bonusButton.addEventListener("click", () => {
@@ -805,6 +796,35 @@ notifBackdrop.addEventListener("click", closeNotifPanel);
 notifPanel.addEventListener("keydown", (e) => {
     if (e.key === "Escape") closeNotifPanel();
 });
+
+// ── Notificaciones descartables (igual que main-page) ──────────
+(function initDismissableNotifs() {
+    const notifItems = document.querySelectorAll('.notif-item');
+    notifItems.forEach(item => {
+        const dismissBtn = document.createElement('button');
+        dismissBtn.innerHTML = '<i class="ph ph-x" aria-hidden="true"></i>';
+        dismissBtn.className = 'icon-button';
+        dismissBtn.setAttribute('aria-label', 'Descartar notificación');
+        dismissBtn.style.cssText = 'padding:4px;width:24px;height:24px;margin-left:auto;flex-shrink:0';
+        item.style.display = 'flex';
+        item.style.alignItems = 'center';
+        item.appendChild(dismissBtn);
+        dismissBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            item.style.transition = 'opacity 0.2s';
+            item.style.opacity = '0';
+            setTimeout(() => {
+                item.remove();
+                const remaining = document.querySelectorAll('.notif-item').length;
+                if (remaining === 0) {
+                    const list = document.querySelector('.notif-list');
+                    if (list) list.innerHTML = '<li style="padding:16px;text-align:center;color:var(--muted)">No hay notificaciones</li>';
+                }
+            }, 200);
+            showToast('Notificación descartada');
+        });
+    });
+})();
 
 // ── Modal de leyes laborales ───────────────────────
 function openLawsModal() {

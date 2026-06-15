@@ -25,6 +25,19 @@ const commentsTriggers = document.querySelectorAll(".comments-trigger");
 const commentSubmitBtn = document.getElementById("comment-submit-btn");
 const newCommentInput = document.getElementById("new-comment-input");
 
+/* ── Comments panel theme sync ───────────────────────
+   Keeps the comments dialog consistent with the accessibility high-contrast/dark mode. */
+function applyCommentsPanelTheme() {
+    if (!commentsPanel) return;
+
+    const darkModeEnabled =
+        document.body.classList.contains("high-contrast") ||
+        localStorage.getItem("high-contrast") === "true";
+
+    commentsPanel.classList.toggle("comments-panel-dark", darkModeEnabled);
+}
+
+
 function showToast(message, duration = 3000) {
     if (!toast) return;
     toast.textContent = message;
@@ -84,14 +97,25 @@ function closeMediaAltPanel() {
 
 function openCommentsPanel() {
     if (!commentsPanel) return;
+    applyCommentsPanelTheme();
     commentsPanel.hidden = false;
-    newCommentInput.focus();
+    if (newCommentInput) newCommentInput.focus();
 }
 
 function closeCommentsPanel() {
     if (!commentsPanel) return;
     commentsPanel.hidden = true;
 }
+
+
+/* Apply again if the global accessibility script changes body classes. */
+const commentsThemeObserver = new MutationObserver(applyCommentsPanelTheme);
+commentsThemeObserver.observe(document.body, {
+    attributes: true,
+    attributeFilter: ["class"],
+});
+
+applyCommentsPanelTheme();
 
 if (expandChartBtn && trendCard) {
     expandChartBtn.addEventListener("click", () => {

@@ -41,24 +41,27 @@ body {
     background: var(--bg);
     border-radius: 34px;
     box-shadow: 0 26px 70px rgba(22, 24, 32, 0.18);
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: 100vh;
     display: flex;
     flex-direction: column;
     position: relative;
 }
 
 .app-header {
-    padding: 20px 20px 10px;
+    padding: 22px 20px 12px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 12px;
+    background: var(--card);
 }
 
 .brand {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
 }
 
 .brand-icon {
@@ -73,8 +76,12 @@ body {
 }
 
 .brand-title {
+    font-family: "Fraunces", serif;
+    font-size: 22px;
     font-weight: 700;
-    font-size: 16px;
+    line-height: 1.1;
+    color: var(--ink);
+    letter-spacing: -0.01em;
 }
 
 .header-right {
@@ -91,15 +98,21 @@ body {
 
 .level-number {
     font-weight: 700;
-    font-size: 12px;
+    font-size: 11px;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.12em;
+    color: var(--muted);
 }
 
 .level-status {
-    font-size: 12px;
-    color: var(--accent);
-    font-weight: 600;
+    font-size: 10px;
+    color: #8b0000;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+}
+
+body.high-contrast .level-status {
+    color: #ff9f1a;
 }
 
 .eyebrow {
@@ -113,34 +126,11 @@ body {
 
 .icon-button {
     border: none;
-    background: #fff;
-    color: var(--ink);
-    width: 36px;
-    height: 36px;
-    border-radius: 12px;
-    box-shadow: 0 10px 20px rgba(17, 19, 26, 0.12);
-    cursor: pointer;
-    display: grid;
-    place-items: center;
-    transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
-}
-
-.icon-button:focus-visible {
-    outline: 2px solid var(--ring);
-    outline-offset: 2px;
-}
-
-.icon-button:hover {
-    transform: translateY(-1px);
-}
-
-.app-header .icon-button {
-    border: none;
     background: transparent;
-    width: 36px;
-    height: 36px;
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
     border-radius: 50%;
     cursor: pointer;
     display: grid;
@@ -148,15 +138,22 @@ body {
     position: relative;
     font-size: 22px;
     color: var(--ink);
-    box-shadow: none;
+    transition:
+        background-color 0.2s ease,
+        outline 0.2s ease;
 }
 
-.app-header .icon-button:focus-visible {
+.icon-button:focus-visible {
     outline: 2px solid var(--ring);
     outline-offset: 2px;
+    background-color: rgba(17, 19, 26, 0.05);
 }
 
-.app-header .notif-dot {
+.icon-button:hover {
+    background-color: rgba(17, 19, 26, 0.08);
+}
+
+.notif-dot {
     width: 8px;
     height: 8px;
     border-radius: 50%;
@@ -178,10 +175,17 @@ body {
 }
 
 .content {
-    padding: 10px 18px 110px;
+    padding: 10px 18px 16px;
     display: flex;
     flex-direction: column;
     gap: 16px;
+    flex: 1;
+    overflow-y: auto;
+    min-height: 0;
+}
+
+.content > * {
+    flex-shrink: 0;
 }
 
 .card {
@@ -237,7 +241,7 @@ body {
 .cta {
     border: none;
     background: var(--accent);
-    color: #fff;
+    color: #1a1a1a;
     border-radius: 14px;
     padding: 13px 18px;
     font-size: 14px;
@@ -289,7 +293,7 @@ body {
     border: none;
     border-radius: 999px;
     background: var(--accent-soft);
-    color: var(--accent-dark);
+    color: #8b0000;
     font-size: 11px;
     padding: 10px 14px;
     cursor: pointer;
@@ -345,7 +349,7 @@ body {
 .link {
     border: none;
     background: none;
-    color: var(--accent-dark);
+    color: #8b0000;
     font-size: 12px;
     font-weight: 600;
     cursor: pointer;
@@ -454,6 +458,45 @@ body {
     font-weight: 600;
 }
 
+.quiz-nav {
+    display: flex;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+.quiz-arrow {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background: #f6f7f9;
+    border: none;
+    border-radius: 14px;
+    padding: 10px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+    cursor: pointer;
+    min-height: 44px;
+    font-family: inherit;
+    transition: background 0.2s ease, color 0.2s ease, outline 0.2s ease;
+}
+
+.quiz-arrow i {
+    font-size: 16px;
+}
+
+.quiz-arrow:hover {
+    background: var(--accent-soft);
+    color: var(--accent);
+}
+
+.quiz-arrow:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+}
+
 .swipe {
     margin: 0;
     text-align: center;
@@ -500,13 +543,13 @@ body {
     display: grid;
     place-items: center;
     background: #f26522;
-    color: #fff;
+    color: #1a1a1a;
     font-size: 14px;
 }
 
 .quickwin-icon.muted {
     background: #f0f2f5;
-    color: #9aa0ac;
+    color: #1a1a1a;
 }
 
 .quickwin-body h4 {
@@ -518,7 +561,7 @@ body {
     border: none;
     border-radius: 10px;
     background: #ffe1d1;
-    color: #d8561c;
+    color: #8b0000;
     font-size: 11px;
     font-weight: 600;
     padding: 8px 14px;
@@ -544,7 +587,7 @@ body {
 
 .quickwin-claimed {
     font-size: 11px;
-    color: #a3a8b4;
+    color: #1a1a1a;
 }
 
 .quickwin-divider {
@@ -559,37 +602,52 @@ body {
 }
 
 .bottom-nav {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    flex-shrink: 0;
     background: #fff;
     border-top: 1px solid #e6e8ee;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    padding: 12px 0 10px;
-    box-shadow: 0 -8px 24px rgba(22, 24, 32, 0.08);
+    padding: 10px 0 12px;
+    box-shadow: 0 -6px 20px rgba(22, 24, 32, 0.07);
     z-index: 100;
 }
 
 .nav-item {
     border: none;
     background: none;
-    display: grid;
-    gap: 6px;
-    place-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
     color: var(--nav-muted);
-    font-size: 11px;
     cursor: pointer;
+    text-decoration: none;
+    padding: 8px 12px;
+    font-family: inherit;
+    min-width: 60px;
+    min-height: 48px;
+    transition: color 0.2s ease, outline 0.2s ease;
+}
+
+.nav-item:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+}
+
+.nav-item:hover {
+    color: var(--accent);
 }
 
 .nav-icon {
-    font-size: 16px;
+    font-size: 20px;
     line-height: 1;
 }
 
 .nav-label {
     font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: #1a1a1a;
 }
 
 .nav-item.active {
@@ -599,18 +657,21 @@ body {
 .toast {
     position: fixed;
     left: 50%;
-    bottom: 24px;
+    bottom: 120px;
     transform: translateX(-50%);
     background: #1c1d26;
     color: #fff;
-    padding: 10px 14px;
+    padding: 12px 18px;
     border-radius: 999px;
-    box-shadow: var(--shadow);
+    box-shadow: 0 18px 40px rgba(17, 19, 26, 0.35);
     opacity: 0;
     pointer-events: none;
     transition:
         opacity 0.3s ease,
         transform 0.3s ease;
+    z-index: 500;
+    font-size: 14px;
+    font-weight: 500;
 }
 
 .toast.show {
@@ -623,7 +684,7 @@ body {
     inset: 0;
     display: grid;
     place-items: center;
-    z-index: 20;
+    z-index: 1001;
 }
 
 .modal[hidden] {
@@ -707,6 +768,12 @@ body {
     transition: width 0.4s ease;
 }
 
+.sim-step[hidden],
+.sim-result[hidden],
+[hidden] {
+    display: none !important;
+}
+
 .sim-step {
     display: grid;
     gap: 10px;
@@ -738,10 +805,26 @@ body {
     font-weight: 600;
     cursor: pointer;
     text-align: left;
+    transition: border-color 0.2s ease, background 0.2s ease, opacity 0.2s ease;
 }
 
 .step-choice:hover {
     border-color: var(--accent);
+}
+
+.step-choice.selected {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+    color: var(--accent-dark);
+}
+
+.step-choice:disabled {
+    cursor: default;
+    opacity: 0.45;
+}
+
+.step-choice.selected:disabled {
+    opacity: 1;
 }
 
 .sim-result {
@@ -894,6 +977,10 @@ body.high-contrast {
     /* El fondo exterior (fuera del móvil) no cambia */
 }
 
+body.high-contrast .level-status {
+    color: #ff9f1a;
+}
+
 body.high-contrast .app {
     background: var(--bg);
     box-shadow: 0 26px 70px rgba(0, 0, 0, 0.6);
@@ -967,7 +1054,7 @@ body.high-contrast .quickwin-xp {
 
 body.high-contrast .chip {
     background: var(--accent-soft);
-    color: var(--accent-dark);
+    color: #ffffff;
 }
 
 body.high-contrast .modal-card {
@@ -994,7 +1081,28 @@ body.high-contrast .hint.hint-error {
 }
 
 body.high-contrast .link {
-    color: var(--accent-dark);
+    color: #ffffff;
+}
+
+body.high-contrast .cta {
+    background: linear-gradient(90deg, #ff7b00, #ff9f1a);
+    color: #000000;
+    box-shadow: 0 14px 24px rgba(255, 123, 0, 0.35);
+}
+
+body.high-contrast .cta:hover {
+    box-shadow: 0 16px 28px rgba(255, 123, 0, 0.45);
+}
+
+body.high-contrast .quiz-arrow {
+    background: #21262d;
+    border-color: #30363d;
+    color: #ffffff;
+}
+
+body.high-contrast .quiz-arrow:hover {
+    background: var(--accent-soft);
+    color: #000000;
 }
 
 body.high-contrast .notif-card {
@@ -1008,6 +1116,67 @@ body.high-contrast .notif-item {
 
 body.high-contrast .notif-item.unread {
     background: #1f2a0d;
+}
+
+body.high-contrast .quickwin-title {
+    color: #ffffff;
+}
+
+body.high-contrast .quickwin-subtitle {
+    color: #f0f6fc;
+}
+
+body.high-contrast .quickwin-status {
+    color: #ffffff;
+}
+
+body.high-contrast .quickwin-claimed {
+    color: #ffffff;
+}
+
+body.high-contrast .quickwin-xp {
+    background: #2d1800;
+    color: #ff9f1a;
+}
+
+body.high-contrast .quickwins-card {
+    background: #2d1800;
+}
+
+body.high-contrast .quickwin-item.subdued .quickwin-body h4 {
+    color: #ffffff;
+}
+
+body.high-contrast .quickwin-body h4 {
+    color: #ffffff;
+}
+
+body.high-contrast .quickwin-item .muted {
+    color: #b8c2cf;
+}
+
+body.high-contrast .eyebrow {
+    color: #ffffff;
+}
+
+body.high-contrast .quiz-tag {
+    color: #ffffff;
+}
+
+body.high-contrast .quiz-counter {
+    color: #f0f6fc;
+}
+
+body.high-contrast .hint {
+    color: #f0f6fc;
+}
+
+body.high-contrast .unit {
+    color: #b8c2cf;
+}
+
+body.high-contrast .nav-label {
+    color: #ffffff;
 }
 
 body.high-contrast .laws-modal-card {
@@ -1026,7 +1195,7 @@ body.high-contrast .law-item {
     inset: 0;
     display: grid;
     place-items: center;
-    z-index: 25;
+    z-index: 1000;
 }
 
 .notif-panel[hidden] {
@@ -1044,7 +1213,7 @@ body.high-contrast .law-item {
     position: relative;
     z-index: 1;
     width: min(360px, 92vw);
-    background: #fff;
+    background: var(--card);
     border-radius: 22px;
     padding: 18px;
     box-shadow: 0 26px 60px rgba(15, 17, 24, 0.3);

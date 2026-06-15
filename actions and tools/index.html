@@ -9,21 +9,21 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Fraunces:wght@600;700&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="styles.css" />
-        <script src="https://unpkg.com/@phosphor-icons/web"></script>
+        <script src="https://unpkg.com/@phosphor-icons/web" async></script>
     </head>
 
     <body>
-        <div class="app" role="application" aria-label="Centro de Acción">
+        <div class="app" role="application" aria-label="Sección de Aprendizaje">
             <!-- Header -->
             <header class="app-header">
                 <div class="brand">
-                    <div class="brand-icon" aria-hidden="true">⚡</div>
+                    <div class="brand-icon" aria-hidden="true"><i class="ph ph-book-open" style="font-size: 20px; color: var(--accent);"></i></div>
                     <div class="brand-text">
-                        <span class="brand-title" data-i18n="header.title">El Conocimiento es Poder</span>
-                        <span class="brand-subtitle" data-i18n="header.subtitle">Empoderando tu vida laboral</span>
+                        <span class="brand-title">Aprende</span>
+                        <span class="brand-subtitle">Recursos educativos y oportunidades</span>
                     </div>
                 </div>
-                <button class="icon-button" type="button" aria-label="Notificaciones">
+                <button class="icon-button" type="button" aria-label="Notificaciones" id="notif-bell">
                     <i class="ph ph-bell" aria-hidden="true"></i>
                     <span class="notif-dot" aria-hidden="true"></span>
                 </button>
@@ -32,31 +32,31 @@
             <main class="content" id="main-content">
                 <!-- Search Bar -->
                 <div class="search-bar" role="search">
-                    <span class="search-icon" aria-hidden="true">🔍</span>
-                    <input type="text" class="search-input" placeholder="Busca derechos, guías o empleos..." aria-label="Buscar derechos, guías o empleos" data-i18n-placeholder="search.placeholder" />
+                    <i class="ph ph-magnifying-glass" aria-hidden="true"></i>
+                    <input type="text" class="search-input" placeholder="Busca cursos, leyes, oportunidades..." aria-label="Buscar recursos educativos" />
                 </div>
 
-                <!-- Action Center Header -->
+                <!-- Aprende Header -->
                 <div class="section-header action-center-header">
-                    <h2 class="section-title" data-i18n="actionCenter.title">Centro de Acción</h2>
-                    <span class="tools-badge" data-i18n="actionCenter.tools">3 HERRAMIENTAS DISPONIBLES</span>
+                    <h2 class="section-title">Centro de Aprendizaje</h2>
+                    <span class="tools-badge">5 RECURSOS DISPONIBLES</span>
                 </div>
 
                 <!-- Your Rights Card -->
                 <section class="card rights-card" aria-labelledby="rights-title" aria-describedby="rights-image-alt">
-                    <div class="rights-image" role="img" aria-label="Ilustración de derechos laborales y protección en el trabajo">
+                    <div class="rights-image" role="img" aria-label="Ilustración de formación y desarrollo profesional">
                         <div class="rights-image-overlay"></div>
-                        <div class="rights-icon">⚡</div>
+                        <div class="rights-icon"><i class="ph ph-graduation-cap" aria-hidden="true"></i></div>
                     </div>
                     <div class="rights-body">
                         <div class="rights-header">
-                            <h3 id="rights-title" data-i18n="rights.title">Tus Derechos</h3>
-                            <span class="badge essential" data-i18n="rights.badge">ESENCIAL</span>
+                            <h3 id="rights-title">Cursos Certificados</h3>
+                            <span class="badge essential">RECOMENDADO</span>
                         </div>
-                        <p id="rights-image-alt" class="sr-only" data-i18n="rights.imageAlt">Imagen simbólica sobre empoderamiento laboral para representar el acceso a derechos y recursos de protección.</p>
-                        <p class="muted" data-i18n="rights.description">Conoce tus derechos. Accede a guías sobre salario mínimo, descansos y contratos.</p>
+                        <p id="rights-image-alt" class="sr-only">Imagen de desarrollo profesional y formación en competencias laborales.</p>
+                        <p class="muted">Aprende nuevas habilidades. Accede a cursos en línea sobre IA, programación y liderazgo.</p>
                         <button class="explore-btn" type="button" id="explore-guides">
-                            <span data-i18n="rights.cta">Explorar Guías</span>
+                            <span>Ver Cursos</span>
                             <span aria-hidden="true">→</span>
                         </button>
                     </div>
@@ -65,15 +65,17 @@
                 <!-- Anti-Exploitation Guide -->
                 <section class="card alert-card" aria-labelledby="alert-title">
                     <div class="alert-icon" aria-hidden="true">
-                        <span>🛡️</span>
+                        <i class="ph ph-shield-check" style="font-size: 24px; color: #ff7b00;"></i>
                     </div>
                     <div class="alert-body">
-                        <h3 id="alert-title" data-i18n="alert.title">Guía contra la Explotación</h3>
-                        <p data-i18n="alert.description">Identifica las señales. Aprende a detectar y denunciar abusos laborales de forma segura.</p>
+                        <h3 id="alert-title">Tus Derechos Laborales</h3>
+                        <p>Conoce tus derechos. Guías sobre salario mínimo, jornadas, descansos y protección.</p>
                         <button class="cta alert-cta" type="button" id="get-help">
-                            <span data-i18n="alert.cta">Obtener ayuda ahora</span>
+                            <span>Leer Guía de Derechos</span>
                         </button>
-                        <button class="text-alt-link" type="button" id="open-easy-read" data-i18n="alert.easyRead">Leer versión en texto fácil</button>
+                        <button class="cta alert-cta" type="button" id="open-easy-read">
+                            <span>Versión en lectura fácil</span>
+                        </button>
                     </div>
                 </section>
 
@@ -81,17 +83,17 @@
                 <section class="section" aria-labelledby="jobs-title">
                     <div class="section-header">
                         <div class="jobs-header-left">
-                            <span class="jobs-icon" aria-hidden="true">💼</span>
-                            <h3 id="jobs-title" data-i18n="jobs.title">Bolsa de Empleo Segura</h3>
+                            <i class="ph ph-briefcase" aria-hidden="true" style="font-size: 20px; color: var(--accent);"></i>
+                            <h3 id="jobs-title">Oportunidades Laborales</h3>
                         </div>
-                        <button class="link" type="button" data-i18n="jobs.viewAll">Ver todo</button>
+                        <button class="link" type="button" id="jobs-view-all">Ver todo</button>
                     </div>
 
                     <div class="card jobs-card">
                         <!-- Job 1 -->
                         <div class="job-item" role="listitem">
                             <div class="job-avatar" style="background: #fce4ec">
-                                <span style="color: #e91e63; font-weight: 700">B</span>
+                                <span style="color: #1a1a1a; font-weight: 700">B</span>
                             </div>
                             <div class="job-info">
                                 <h4 data-i18n="jobs.job1.title">Barista</h4>
@@ -108,7 +110,7 @@
                         <!-- Job 2 -->
                         <div class="job-item" role="listitem">
                             <div class="job-avatar" style="background: #fff3e0">
-                                <span style="color: #e65100; font-weight: 700">D</span>
+                                <span style="color: #1a1a1a; font-weight: 700">D</span>
                             </div>
                             <div class="job-info">
                                 <h4 data-i18n="jobs.job2.title">Repartidor</h4>
@@ -132,20 +134,20 @@
             <!-- Bottom Navigation -->
             <nav class="bottom-nav" aria-label="Principal">
                 <a href="../main-page/index.html" class="nav-item" aria-label="Inicio" style="text-decoration: none">
-                    <span class="nav-icon" aria-hidden="true">⌂</span>
-                    <span class="nav-label" data-i18n="nav.home">Inicio</span>
+                    <span class="nav-icon" aria-hidden="true"><i class="ph ph-house"></i></span>
+                    <span class="nav-label">Inicio</span>
                 </a>
-                <button class="nav-item active" type="button" aria-label="Acción" aria-current="page">
-                    <span class="nav-icon" aria-hidden="true">◎</span>
-                    <span class="nav-label" data-i18n="nav.action">Acción</span>
+                <button class="nav-item active" type="button" aria-label="Aprende" aria-current="page">
+                    <span class="nav-icon" aria-hidden="true"><i class="ph ph-book-open"></i></span>
+                    <span class="nav-label">Aprende</span>
                 </button>
                 <a href="../challenges/index.html" class="nav-item" aria-label="Retos" style="text-decoration: none">
-                    <span class="nav-icon" aria-hidden="true">◉</span>
-                    <span class="nav-label" data-i18n="nav.challenges">Retos</span>
+                    <span class="nav-icon" aria-hidden="true"><i class="ph ph-medal"></i></span>
+                    <span class="nav-label">Retos</span>
                 </a>
                 <a href="../profile/index.html" class="nav-item" aria-label="Perfil" style="text-decoration: none">
-                    <span class="nav-icon" aria-hidden="true">☺</span>
-                    <span class="nav-label" data-i18n="nav.profile">Perfil</span>
+                    <span class="nav-icon" aria-hidden="true"><i class="ph ph-user"></i></span>
+                    <span class="nav-label">Perfil</span>
                 </a>
             </nav>
         </div>
@@ -295,7 +297,7 @@
             <div class="modal-backdrop" data-close="job-detail"></div>
             <div class="modal-card" role="document">
                 <div class="modal-header">
-                    <h2 id="job-detail-title" style="margin: 0"></h2>
+                    <h2 id="job-detail-title" style="margin: 0">Detalles del Empleo</h2>
                     <button class="icon-button" type="button" aria-label="Cerrar" data-close="job-detail">✕</button>
                 </div>
                 <div class="modal-content" id="job-detail-content">

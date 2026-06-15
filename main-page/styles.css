@@ -843,6 +843,7 @@ body {
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 0.04em;
+    color: #1a1a1a;
 }
 
 .nav-item.active {
@@ -1420,6 +1421,10 @@ body.large-text .quiz-btn {
     text-align: center;
 }
 
+body.high-contrast .nav-label {
+    color: #ffffff;
+}
+
 body.large-text .nav-label {
     font-size: 12px;
 }
@@ -1448,4 +1453,105 @@ body.large-text .nav-item {
         animation: none !important;
         transition: none !important;
     }
+}
+
+
+/* ── Modo oscuro / alto contraste para el panel de comentarios ──────────
+   Se aplica tanto cuando el body tiene .high-contrast como cuando el JS añade
+   .comments-panel-dark al abrir el panel. */
+
+body.high-contrast .comments-card,
+.comments-panel.comments-panel-dark .comments-card {
+    background: #161b22 !important;
+    color: #f3f6fa !important;
+    border: 1px solid #30363d !important;
+    box-shadow: 0 26px 60px rgba(0, 0, 0, 0.55) !important;
+}
+
+body.high-contrast .comments-header,
+.comments-panel.comments-panel-dark .comments-header {
+    background: #161b22 !important;
+    border-bottom: 1px solid #30363d !important;
+}
+
+body.high-contrast .comments-header h2,
+.comments-panel.comments-panel-dark .comments-header h2 {
+    color: #f3f6fa !important;
+}
+
+body.high-contrast .comments-list,
+.comments-panel.comments-panel-dark .comments-list {
+    background: #161b22 !important;
+}
+
+body.high-contrast .comment-item,
+.comments-panel.comments-panel-dark .comment-item {
+    background: #0d1117 !important;
+    border: 1px solid #30363d !important;
+}
+
+body.high-contrast .comment-avatar,
+.comments-panel.comments-panel-dark .comment-avatar {
+    background: #2d1800 !important;
+    color: #ffd2ad !important;
+}
+
+body.high-contrast .comment-author,
+.comments-panel.comments-panel-dark .comment-author {
+    color: #f3f6fa !important;
+}
+
+body.high-contrast .comment-text,
+.comments-panel.comments-panel-dark .comment-text {
+    color: #d0d8e4 !important;
+}
+
+body.high-contrast .comment-time,
+.comments-panel.comments-panel-dark .comment-time {
+    color: #b8c2cf !important;
+}
+
+body.high-contrast .comments-input-area,
+.comments-panel.comments-panel-dark .comments-input-area {
+    background: #161b22 !important;
+    border-top: 1px solid #30363d !important;
+}
+
+body.high-contrast #new-comment-input,
+.comments-panel.comments-panel-dark #new-comment-input {
+    background: #0d1117 !important;
+    color: #f3f6fa !important;
+    border: 1px solid #30363d !important;
+}
+
+body.high-contrast #new-comment-input::placeholder,
+.comments-panel.comments-panel-dark #new-comment-input::placeholder {
+    color: #b8c2cf !important;
+}
+
+body.high-contrast #new-comment-input:focus,
+.comments-panel.comments-panel-dark #new-comment-input:focus {
+    border-color: #58a6ff !important;
+    box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.22) !important;
+}
+
+body.high-contrast #comment-submit-btn,
+.comments-panel.comments-panel-dark #comment-submit-btn {
+    background: #ff7b00 !important;
+    color: #ffffff !important;
+}
+
+body.high-contrast #comment-submit-btn:hover,
+.comments-panel.comments-panel-dark #comment-submit-btn:hover {
+    background: #ff9f1a !important;
+}
+
+body.high-contrast #comments-close,
+.comments-panel.comments-panel-dark #comments-close {
+    color: #f3f6fa !important;
+}
+
+body.high-contrast #comments-close:hover,
+.comments-panel.comments-panel-dark #comments-close:hover {
+    background: rgba(255, 255, 255, 0.08) !important;
 }
