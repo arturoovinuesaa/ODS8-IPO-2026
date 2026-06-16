@@ -6,6 +6,7 @@ const state = {
     bonusClaimed: false,
     quizIndex: 0,
     answeredByLocale: {},
+    pendingAnswerIndex: null,
     maxXpShown: false,
     level: 12,
 };
@@ -28,6 +29,9 @@ const i18n = {
         "trivia.question": "¿Cuál es el máximo legal de horas semanales sin horas extra?",
         "trivia.swipe": "Desliza para la siguiente pregunta",
         "trivia.counter": "Pregunta {current}/{total}",
+        "trivia.confirm": "Confirmar respuesta",
+        "trivia.selected": "Respuesta seleccionada. Confirma para enviarla.",
+        "trivia.noSelection": "Selecciona una respuesta antes de confirmar.",
         "trivia.correct": "Correcto. +{xp} XP",
         "trivia.incorrect": "Respuesta incorrecta. Prueba otra.",
         "trivia.reveal": "La respuesta correcta es: {answer}.",
@@ -66,6 +70,9 @@ const i18n = {
         "trivia.question": "What is the maximum legal working hours per week without overtime?",
         "trivia.swipe": "Swipe for next question",
         "trivia.counter": "Question {current}/{total}",
+        "trivia.confirm": "Confirm answer",
+        "trivia.selected": "Answer selected. Confirm to submit it.",
+        "trivia.noSelection": "Select an answer before confirming.",
         "trivia.correct": "Correct. +{xp} XP",
         "trivia.incorrect": "Incorrect answer. Try another.",
         "trivia.reveal": "The correct answer is: {answer}.",
@@ -222,6 +229,7 @@ const questionTitle = document.getElementById("question-title");
 const quizCounter = document.getElementById("quiz-counter");
 const nextQuestionButton = document.getElementById("next-question");
 const prevQuestionButton = document.getElementById("prev-question");
+const confirmAnswerButton = document.getElementById("confirm-answer-btn");
 const quizCard = document.querySelector(".quiz");
 const weeklyModal = document.getElementById("weekly-modal");
 const modalCloseButtons = document.querySelectorAll("[data-close='true']");
@@ -542,6 +550,13 @@ function renderQuestion() {
         answerEl.classList.remove("is-correct", "is-incorrect", "is-revealed");
     });
 
+    state.pendingAnswerIndex = null;
+    if (confirmAnswerButton) {
+        confirmAnswerButton.textContent = i18n[state.locale]["trivia.confirm"];
+        confirmAnswerButton.disabled = true;
+        confirmAnswerButton.setAttribute("aria-disabled", "true");
+    }
+
     if (!isLocked) {
         hint.classList.remove("hint-success", "hint-error");
         hint.textContent = "";
@@ -582,8 +597,6 @@ function changeQuestion(direction) {
 function handleAnswerClick(event) {
     const button = event.currentTarget;
     const value = Number.parseInt(button.dataset.answer, 10);
-    const quizSet = getCurrentQuizSet();
-    const question = quizSet[state.quizIndex];
     const answeredMap = getAnsweredMap();
 
     if (answeredMap[state.quizIndex]) {
@@ -595,11 +608,49 @@ function handleAnswerClick(event) {
     answers.forEach((item) => {
         item.setAttribute("aria-checked", "false");
     });
+
     button.setAttribute("aria-checked", "true");
+    state.pendingAnswerIndex = value;
     state.answer = value;
+
+    if (confirmAnswerButton) {
+        confirmAnswerButton.disabled = false;
+        confirmAnswerButton.setAttribute("aria-disabled", "false");
+        confirmAnswerButton.focus();
+    }
+
+    hint.classList.remove("hint-success", "hint-error");
+    hint.textContent = i18n[state.locale]["trivia.selected"];
+    showToast(i18n[state.locale]["trivia.selected"]);
+}
+
+function confirmSelectedAnswer() {
+    const value = state.pendingAnswerIndex;
+    const quizSet = getCurrentQuizSet();
+    const question = quizSet[state.quizIndex];
+    const answeredMap = getAnsweredMap();
+
+    if (answeredMap[state.quizIndex]) {
+        hint.textContent = i18n[state.locale]["trivia.locked"];
+        showToast(i18n[state.locale]["trivia.locked"]);
+        return;
+    }
+
+    if (value === null || Number.isNaN(value)) {
+        hint.classList.remove("hint-success");
+        hint.classList.add("hint-error");
+        hint.textContent = i18n[state.locale]["trivia.noSelection"];
+        showToast(i18n[state.locale]["trivia.noSelection"]);
+        return;
+    }
 
     if (!question) {
         return;
+    }
+
+    if (confirmAnswerButton) {
+        confirmAnswerButton.disabled = true;
+        confirmAnswerButton.setAttribute("aria-disabled", "true");
     }
 
     if (value === question.correctIndex) {
@@ -612,9 +663,10 @@ function handleAnswerClick(event) {
         showToast(correctMessage);
         updateProgress();
         answeredMap[state.quizIndex] = { correct: true, selectedIndex: value };
+        state.pendingAnswerIndex = null;
         renderQuestion();
-        clearTimeout(handleAnswerClick.advanceId);
-        handleAnswerClick.advanceId = setTimeout(() => {
+        clearTimeout(confirmSelectedAnswer.advanceId);
+        confirmSelectedAnswer.advanceId = setTimeout(() => {
             changeQuestion(1);
         }, 900);
     } else {
@@ -625,6 +677,7 @@ function handleAnswerClick(event) {
         hint.textContent = `${incorrectMessage} ${revealMessage}`;
         showToast(revealMessage);
         answeredMap[state.quizIndex] = { correct: false, selectedIndex: value };
+        state.pendingAnswerIndex = null;
         renderQuestion();
     }
 }
@@ -632,6 +685,10 @@ function handleAnswerClick(event) {
 answers.forEach((answer) => {
     answer.addEventListener("click", handleAnswerClick);
 });
+
+if (confirmAnswerButton) {
+    confirmAnswerButton.addEventListener("click", confirmSelectedAnswer);
+}
 
 playButton.addEventListener("click", () => {
     openWeeklyModal();

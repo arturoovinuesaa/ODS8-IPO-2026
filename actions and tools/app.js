@@ -7,6 +7,11 @@ const bellButton = document.getElementById("notif-bell");
 const notifPanel = document.getElementById("notif-panel");
 const notifClose = document.getElementById("notif-close");
 const notifBackdrop = document.getElementById("notif-backdrop");
+
+function setNotificationsExpanded(isOpen) {
+    if (!bellButton) return;
+    bellButton.setAttribute("aria-expanded", String(isOpen));
+}
 const jobsViewAllBtn = document.getElementById("jobs-view-all");
 const easyReadBtn = document.getElementById("open-easy-read");
 
@@ -101,10 +106,25 @@ const jobsData = [
 /* ── Toast ── */
 function showToast(message, duration = 2200) {
     if (!toast) return;
+
+    clearTimeout(showToast.timeoutId);
+
+    toast.hidden = false;
     toast.textContent = message;
-    toast.classList.add("show");
-    toast.setAttribute('aria-live', 'polite');
-    setTimeout(() => toast.classList.remove("show"), duration);
+    toast.setAttribute("aria-live", "polite");
+
+    requestAnimationFrame(() => {
+        toast.classList.add("show");
+    });
+
+    showToast.timeoutId = setTimeout(() => {
+        toast.classList.remove("show");
+
+        setTimeout(() => {
+            toast.hidden = true;
+            toast.textContent = "";
+        }, 300);
+    }, duration);
 }
 
 /* ── Modal functions ── */
@@ -291,11 +311,13 @@ if (jobsViewAllBtn) {
 
 function openNotifPanel() {
     notifPanel.hidden = false;
+    setNotificationsExpanded(true);
     notifClose.focus();
 }
 
 function closeNotifPanel() {
     notifPanel.hidden = true;
+    setNotificationsExpanded(false);
     bellButton.focus();
 }
 
@@ -314,4 +336,50 @@ if (bellButton && notifPanel && notifClose && notifBackdrop) {
     notifPanel.addEventListener("keydown", (e) => {
         if (e.key === "Escape") closeNotifPanel();
     });
+    
 }
+// ── Notificaciones descartables ───────────────────────
+(function initDismissableNotifications() {
+    const notifItems = document.querySelectorAll(".notif-item");
+
+    notifItems.forEach((item) => {
+        // Evita duplicar botones si la función se ejecuta más de una vez
+        if (item.querySelector(".notif-dismiss-btn")) return;
+
+        const dismissBtn = document.createElement("button");
+        dismissBtn.className = "icon-button notif-dismiss-btn";
+        dismissBtn.type = "button";
+        dismissBtn.setAttribute("aria-label", "Descartar notificación");
+        dismissBtn.innerHTML = '<i class="ph ph-x" aria-hidden="true"></i>';
+
+        dismissBtn.style.cssText =
+            "padding:4px;width:24px;height:24px;min-width:24px;min-height:24px;margin-left:auto;flex-shrink:0;box-shadow:none;background:transparent;";
+
+        item.style.display = "flex";
+        item.style.alignItems = "center";
+        item.appendChild(dismissBtn);
+
+        dismissBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+
+            item.style.transition = "opacity 0.2s ease";
+            item.style.opacity = "0";
+
+            setTimeout(() => {
+                item.remove();
+
+                const remaining = document.querySelectorAll(".notif-item").length;
+                const list = document.querySelector(".notif-list");
+
+                if (remaining === 0 && list) {
+                    list.innerHTML =
+                        '<li style="padding:16px;text-align:center;color:var(--muted)">No hay notificaciones</li>';
+                }
+            }, 200);
+
+            showToast("Notificación descartada");
+        });
+    });
+})();
+
+

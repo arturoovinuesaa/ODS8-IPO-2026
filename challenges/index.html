@@ -3,33 +3,63 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="color-scheme" content="light" />
+        <meta name="color-scheme" content="light dark" />
         <title>Retos - ODS 8</title>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Fraunces:wght@600;700&display=swap" rel="stylesheet" />
+        <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+
+        <link
+            rel="preload"
+            as="style"
+            href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Fraunces:wght@600;700&display=swap"
+            onload="this.onload=null;this.rel='stylesheet'" />
+
+        <link
+            rel="preload"
+            as="style"
+            href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/regular/style.css"
+            onload="this.onload=null;this.rel='stylesheet'" />
+
+        <link
+            rel="preload"
+            as="style"
+            href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/fill/style.css"
+            onload="this.onload=null;this.rel='stylesheet'" />
+
+        <noscript>
+            <link
+                rel="stylesheet"
+                href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Fraunces:wght@600;700&display=swap" />
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/regular/style.css" />
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/fill/style.css" />
+        </noscript>
+
         <link rel="stylesheet" href="styles.css" />
-        <script src="https://unpkg.com/@phosphor-icons/web" async></script>
     </head>
 
     <body>
-        <div class="app" role="application" aria-label="Retos">
+        <div class="app" aria-label="Retos ODS 8">
             <header class="app-header">
                 <div class="brand">
-                    <i class="ph ph-medal" aria-hidden="true"></i>
-                    <span class="brand-title">Retos</span>
-                </div>
-                <div class="header-right">
-                    <div class="level">
-                        <span class="level-number">Nivel 12</span>
-                        <span class="level-status">Defensor Pro</span>
+                    <div class="brand-icon" aria-hidden="true">
+                        <i class="ph ph-medal" aria-hidden="true"></i>
                     </div>
-                    <button class="icon-button" type="button" id="notif-bell" aria-label="Notificaciones">
-                        <i class="ph ph-bell" aria-hidden="true"></i>
-                        <span class="notif-dot" aria-hidden="true"></span>
-                    </button>
+                    <div class="brand-text">
+                        <span class="brand-title">Retos</span>
+                        <span class="brand-subtitle">ODS 8: DESAFÍOS</span>
+                    </div>
                 </div>
+                <button class="icon-button" type="button" id="notif-bell" aria-label="Notificaciones" aria-haspopup="dialog" aria-controls="notif-panel" aria-expanded="false">
+                    <i class="ph ph-bell" aria-hidden="true"></i>
+                    <span class="notif-dot" aria-hidden="true"></span>
+                </button>
             </header>
+
+            <div class="level-summary" aria-label="Nivel actual">
+                <span class="level-number">Nivel 12</span>
+                <span class="level-status">Defensor Pro</span>
+            </div>
 
             <main class="content" id="main-content">
                 <section class="card hero" aria-labelledby="weekly-challenge">
@@ -86,6 +116,15 @@
                             <button class="answer" type="button" role="radio" aria-checked="false" data-answer="40"><span>40</span> <span class="muted">Horas</span></button>
                             <button class="answer" type="button" role="radio" aria-checked="false" data-answer="48"><span>48</span> <span class="muted">Horas</span></button>
                         </div>
+                        <button
+                            class="confirm-answer-btn"
+                            type="button"
+                            id="confirm-answer-btn"
+                            disabled
+                            aria-disabled="true"
+                            aria-describedby="answer-hint">
+                            Confirmar respuesta
+                        </button>
                         <p id="answer-hint" class="hint" aria-live="polite"></p>
                     </div>
                     <div class="quiz-nav" role="group" aria-label="Navegación de preguntas">

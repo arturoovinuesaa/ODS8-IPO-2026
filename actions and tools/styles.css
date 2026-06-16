@@ -20,14 +20,16 @@
     --space-4: 20px;
     --space-5: 28px;
 }
-
+html {
+    font-family: "Space Grotesk", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+}
 * {
     box-sizing: border-box;
 }
 
 body {
     margin: 0;
-    font-family: "Space Grotesk", "Segoe UI", sans-serif;
+    font-family: inherit;
     background: linear-gradient(180deg, #ffffff 0%, #f0f2f5 100%);
     color: var(--ink);
     min-height: 100vh;
@@ -73,36 +75,44 @@ body {
 .brand {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
+    min-width: 0;
 }
 
 .brand-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: #1a2744;
+    width: 42px;
+    height: 42px;
+    border-radius: 13px;
+    background: #fff1e8;
+    color: var(--accent);
     display: grid;
     place-items: center;
-    color: var(--accent);
-    font-size: 18px;
+    font-size: 22px;
+    flex-shrink: 0;
 }
 
 .brand-text {
     display: flex;
     flex-direction: column;
     gap: 1px;
+    min-width: 0;
 }
 
 .brand-title {
+    font-family: "Fraunces", serif;
+    font-size: 22px;
     font-weight: 700;
-    font-size: 15px;
-    line-height: 1.2;
+    line-height: 1.1;
+    color: var(--ink);
+    letter-spacing: -0.01em;
 }
 
 .brand-subtitle {
-    font-size: 11px;
+    font-size: 10px;
     color: var(--muted);
-    font-weight: 500;
+    letter-spacing: 0.12em;
+    font-weight: 700;
+    text-transform: uppercase;
 }
 
 .icon-button {
@@ -1361,4 +1371,238 @@ body.high-contrast .job-button:hover {
 .comments-dark-mode .icon-button:hover,
 .comments-dark-mode button:hover {
     background-color: rgba(255, 255, 255, 0.08);
+}
+/* ── Ajuste visual de botones para descartar notificaciones ── */
+
+.notif-dismiss-btn {
+    color: var(--ink);
+}
+
+.notif-dismiss-btn:hover {
+    background: rgba(17, 19, 26, 0.08) !important;
+}
+
+.notif-dismiss-btn:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+}
+
+body.high-contrast .notif-dismiss-btn {
+    color: #f3f6fa;
+}
+
+body.high-contrast .notif-dismiss-btn:hover {
+    background: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* ── Performance and accessibility refinements ─────────────────────
+   These rules support the optimized HTML: Phosphor is loaded only in the
+   regular/fill families and Google Fonts are loaded without blocking the
+   initial render. */
+
+.ph,
+.ph-fill {
+    display: inline-block;
+    line-height: 1;
+    vertical-align: -0.125em;
+    font-style: normal;
+}
+
+.sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    clip-path: inset(50%) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+    color: #11131a !important;
+    background-color: #ffffff !important;
+}
+
+body.high-contrast .sr-only,
+body.dark-mode .sr-only {
+    color: #ffffff !important;
+    background-color: #11131a !important;
+}
+
+/* Avoid low-contrast icon/text states in light and high-contrast modes. */
+.link {
+    color: #b2440f !important;
+    font-weight: 700 !important;
+}
+
+.link:hover,
+.link:focus-visible {
+    color: #8f2f0b !important;
+}
+
+body.high-contrast .link,
+body.dark-mode .link {
+    color: #ffd2ad !important;
+}
+
+body.high-contrast .link:hover,
+body.high-contrast .link:focus-visible,
+body.dark-mode .link:hover,
+body.dark-mode .link:focus-visible {
+    color: #ffb36b !important;
+}
+
+body.high-contrast .job-salary,
+body.high-contrast .job-info h4,
+body.high-contrast .modal-content h3,
+body.high-contrast .modal-content p,
+body.high-contrast .easy-read-content li {
+    color: #f3f6fa !important;
+}
+
+
+/* ── Header coherente con la pantalla de Inicio ───────────────────── */
+body.high-contrast .brand-icon,
+body.dark-mode .brand-icon {
+    background: #2d1800;
+    color: #ff9f1a;
+}
+
+body.high-contrast .brand-subtitle,
+body.dark-mode .brand-subtitle {
+    color: #c7d0db;
+}
+
+
+/* ── Contrast fixes: Safe job board / Bolsa de empleo segura ── */
+
+/* Avatares con iniciales dentro de las ofertas */
+.jobs-card .job-avatar,
+#jobs-modal .job-avatar,
+#job-detail-modal .job-avatar {
+    background: #1c1d26 !important;
+    border: 1px solid #1c1d26 !important;
+}
+
+.jobs-card .job-avatar span,
+#jobs-modal .job-avatar span,
+#job-detail-modal .job-avatar span {
+    color: #ffffff !important;
+    background: transparent !important;
+    font-weight: 800 !important;
+}
+
+/* Salarios de las ofertas: antes usaban el naranja principal, que era bajo sobre fondo claro */
+.jobs-card .job-salary,
+#jobs-modal .job-salary,
+#job-detail-modal .job-salary,
+#jobs-modal span[style*="var(--accent)"],
+#job-detail-modal span[style*="var(--accent)"] {
+    color: #8f2f0b !important;
+    background: transparent !important;
+    font-weight: 800 !important;
+}
+
+/* Etiqueta NUEVO */
+.jobs-card .job-tag.new,
+#jobs-modal .job-tag.new,
+#job-detail-modal .job-tag.new,
+#jobs-modal span[style*="#fff3e0"],
+#job-detail-modal span[style*="#fff3e0"],
+#jobs-modal span[style*="255, 243, 224"],
+#job-detail-modal span[style*="255, 243, 224"] {
+    background: #ffe8d6 !important;
+    color: #8f2f0b !important;
+    border: 1px solid #ffbf8a !important;
+    font-weight: 800 !important;
+}
+
+/* Botón Volver dentro del detalle de empleo.
+   Se diferencia del botón de Solicitar empleo con fondo oscuro. */
+#job-detail-modal .text-alt-link {
+    background: #11131a !important;
+    color: #ffffff !important;
+    border: 1px solid #11131a !important;
+    font-weight: 800 !important;
+}
+
+#job-detail-modal .text-alt-link:hover,
+#job-detail-modal .text-alt-link:focus-visible {
+    background: #2a2d38 !important;
+    color: #ffffff !important;
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+}
+
+/* Modo oscuro / alto contraste */
+body.high-contrast .jobs-card .job-avatar,
+body.high-contrast #jobs-modal .job-avatar,
+body.high-contrast #job-detail-modal .job-avatar {
+    background: #f3f6fa !important;
+    border-color: #f3f6fa !important;
+}
+
+body.high-contrast .jobs-card .job-avatar span,
+body.high-contrast #jobs-modal .job-avatar span,
+body.high-contrast #job-detail-modal .job-avatar span {
+    color: #11131a !important;
+}
+
+body.high-contrast .jobs-card .job-salary,
+body.high-contrast #jobs-modal .job-salary,
+body.high-contrast #job-detail-modal .job-salary,
+body.high-contrast #jobs-modal span[style*="var(--accent)"],
+body.high-contrast #job-detail-modal span[style*="var(--accent)"] {
+    color: #ffd2ad !important;
+    background: transparent !important;
+}
+
+body.high-contrast .jobs-card .job-tag.new,
+body.high-contrast #jobs-modal .job-tag.new,
+body.high-contrast #job-detail-modal .job-tag.new,
+body.high-contrast #jobs-modal span[style*="#fff3e0"],
+body.high-contrast #job-detail-modal span[style*="#fff3e0"],
+body.high-contrast #jobs-modal span[style*="255, 243, 224"],
+body.high-contrast #job-detail-modal span[style*="255, 243, 224"] {
+    background: #3d2200 !important;
+    color: #ffd2ad !important;
+    border-color: #ff9f1a !important;
+}
+
+body.high-contrast #job-detail-modal .text-alt-link {
+    background: #f3f6fa !important;
+    color: #11131a !important;
+    border-color: #f3f6fa !important;
+}
+
+body.high-contrast #job-detail-modal .text-alt-link:hover,
+body.high-contrast #job-detail-modal .text-alt-link:focus-visible {
+    background: #d0d8e4 !important;
+    color: #11131a !important;
+    outline: 2px solid #58a6ff;
+    outline-offset: 2px;
+}
+
+/* Quitar aura naranja del botón Volver */
+#job-detail-modal .text-alt-link {
+    box-shadow: none !important;
+    filter: none !important;
+}
+
+/* Hover sin aura naranja */
+#job-detail-modal .text-alt-link:hover {
+    box-shadow: none !important;
+    filter: none !important;
+    background: #2a2d38 !important;
+    color: #ffffff !important;
+}
+
+/* Focus accesible, pero sin aura naranja */
+#job-detail-modal .text-alt-link:focus-visible {
+    box-shadow: none !important;
+    filter: none !important;
+    outline: 2px solid #11131a !important;
+    outline-offset: 3px !important;
+    background: #2a2d38 !important;
+    color: #ffffff !important;
 }

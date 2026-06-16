@@ -18,7 +18,7 @@
 }
 
 body {
-    font-family: "Space Grotesk", "Segoe UI", sans-serif;
+    font-family: "Space Grotesk", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, Arial, sans-serif;
     background: linear-gradient(180deg, #ffffff 0%, #f0f2f5 100%);
     color: var(--ink);
     min-height: 100vh;
@@ -27,16 +27,35 @@ body {
     padding: 18px 12px 32px;
 }
 
+
 .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    clip-path: inset(50%) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+    color: #11131a !important;
+    background-color: #ffffff !important;
+}
+
+body.high-contrast .sr-only,
+body.dark-mode .sr-only {
+    color: #ffffff !important;
+    background-color: #11131a !important;
+}
+
+/* Ajuste base para que los iconos mantengan alineación aunque la fuente se cargue de forma diferida */
+.ph,
+.ph-fill {
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .app {
@@ -95,7 +114,7 @@ body {
 
 .brand-subtitle {
     font-size: 10px;
-    color: #8896aa;
+    color: var(--muted) !important;
     letter-spacing: 0.12em;
     font-weight: 700;
     text-transform: uppercase;
@@ -198,7 +217,7 @@ body {
 }
 
 .trend-delta {
-    color: var(--accent);
+    color: var(--accent-dark) !important;
     font-weight: 600;
     font-size: 13px;
     white-space: nowrap;
@@ -210,8 +229,8 @@ body {
     gap: 5px;
     font-size: 11px;
     font-weight: 700;
-    color: var(--accent);
-    background: var(--accent-soft);
+    color: var(--accent-dark) !important;
+    background: var(--accent-soft) !important;
     border-radius: 8px;
     padding: 6px 10px;
     white-space: nowrap;
@@ -362,7 +381,7 @@ body {
     font-size: 11px;
     letter-spacing: 0.06em;
     font-weight: 600;
-    color: #aab3c0;
+    color: var(--muted) !important;
     text-transform: uppercase;
 }
 
@@ -384,7 +403,7 @@ body {
 .link {
     border: none;
     background: transparent;
-    color: var(--accent);
+    color: var(--accent-dark) !important;
     font-size: 12px;
     font-weight: 600;
     cursor: pointer;
@@ -405,7 +424,7 @@ body {
 }
 
 .link:hover {
-    color: var(--accent-dark);
+    color: var(--accent) !important;
 }
 
 .facts {
@@ -739,9 +758,9 @@ body {
 }
 
 .challenge-banner {
-    background: var(--accent);
+    background: var(--accent-dark) !important;
+    color: #ffffff !important;
     border-radius: 16px;
-    color: #fff;
     padding: 16px 16px 16px 20px;
     display: flex;
     justify-content: space-between;
@@ -751,22 +770,25 @@ body {
 
 .challenge-banner h3 {
     font-size: 16px;
+    color: #ffffff !important;
     font-weight: 700;
     margin-bottom: 3px;
 }
 
 .challenge-banner p {
+    color: #ffffff !important;
     font-size: 12px;
-    opacity: 0.88;
+    opacity: 1 !important;
     line-height: 1.4;
+
 }
 
 .quiz-btn {
     border: none;
     border-radius: 10px;
     padding: 12px 20px;
-    color: var(--accent);
-    background: #fff;
+    color: var(--accent-dark) !important;
+    background: #ffffff !important;
     font-size: 14px;
     font-weight: 700;
     white-space: nowrap;
@@ -1554,4 +1576,182 @@ body.high-contrast #comments-close,
 body.high-contrast #comments-close:hover,
 .comments-panel.comments-panel-dark #comments-close:hover {
     background: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* ── Contraste accesible para contadores sobre vídeo ── */
+
+.side-count {
+    color: #ffffff !important;
+    background: rgba(17, 19, 26, 0.72) !important;
+    border-radius: 999px;
+    padding: 3px 8px;
+    min-width: 38px;
+    text-align: center;
+    text-shadow: none;
+    font-weight: 700;
+}
+
+/* Mejora también el contraste de los botones laterales sobre imagen */
+.side-action {
+    background: rgba(17, 19, 26, 0.48) !important;
+    border-radius: 50%;
+}
+
+.side-action:hover,
+.side-action:focus-visible {
+    background: rgba(17, 19, 26, 0.72) !important;
+}
+/* Botón/enlace "Desliza para ver más" */
+.facts .link,
+button.link {
+    color: #b2440f !important;
+    background-color: transparent !important;
+    font-weight: 700 !important;
+}
+
+.facts .link:hover,
+button.link:hover {
+    color: #8f2f0b !important;
+    background-color: rgba(242, 101, 34, 0.08) !important;
+}
+
+/* Chip "DATOS EN VIVO" */
+.live-chip {
+    color: #b2440f !important;
+    background-color: #ffe8d6 !important;
+    font-weight: 700 !important;
+    border: 1px solid #ffd2ad !important;
+}
+
+/* Punto del chip: mantiene el color de marca pero con borde para distinguirse */
+.live-dot {
+    background: #b2440f !important;
+    border: 1px solid #8f2f0b !important;
+}
+
+
+/* ── Contraste accesible para títulos sobre vídeos ── */
+
+.story-card h4,
+.story-info h4,
+.story-content h4,
+.video-card h4 {
+    color: #ffffff !important;
+    background: rgba(17, 19, 26, 0.76) !important;
+    padding: 6px 10px;
+    border-radius: 12px;
+    display: inline-block;
+    line-height: 1.25;
+    font-weight: 700;
+    opacity: 1 !important;
+}
+
+/* ── Accessible media alternative modal over the whole screen ── */
+
+.media-alt-panel,
+.media-alt-modal {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 9999 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+/* Mantener oculto cuando tenga hidden */
+.media-alt-panel[hidden],
+.media-alt-modal[hidden] {
+    display: none !important;
+}
+
+/* Fondo oscuro/transparente que cubre también el footer */
+.media-alt-backdrop {
+    position: absolute !important;
+    inset: 0 !important;
+    background: rgba(17, 19, 26, 0.58) !important;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    z-index: 1;
+}
+
+/* Tarjeta del modal por encima del fondo */
+.media-alt-card {
+    position: relative !important;
+    z-index: 2 !important;
+    background: #ffffff;
+    color: var(--ink);
+    border-radius: 24px;
+    max-width: 430px;
+    width: min(100%, 430px);
+    box-shadow: 0 24px 60px rgba(17, 19, 26, 0.28);
+}
+
+
+/* ── Dark mode contrast fixes ───────────────────── */
+
+/* Botón/enlace "Desliza para ver más" en modo oscuro */
+body.high-contrast .facts .link,
+body.high-contrast button.link,
+body.dark-mode .facts .link,
+body.dark-mode button.link {
+    color: #ffd2ad !important;
+    background-color: transparent !important;
+    font-weight: 700 !important;
+}
+
+body.high-contrast .facts .link:hover,
+body.high-contrast button.link:hover,
+body.dark-mode .facts .link:hover,
+body.dark-mode button.link:hover {
+    color: #ffb36b !important;
+    background-color: rgba(255, 159, 26, 0.14) !important;
+}
+
+/* Banner del reto en modo oscuro */
+body.high-contrast .challenge-banner,
+body.dark-mode .challenge-banner {
+    background: #3d2200 !important;
+    border: 1px solid #ff9f1a !important;
+    color: #fff8f0 !important;
+}
+
+/* Título y texto del banner */
+body.high-contrast .challenge-banner h3,
+body.high-contrast .challenge-banner p,
+body.dark-mode .challenge-banner h3,
+body.dark-mode .challenge-banner p {
+    color: #fff8f0 !important;
+    opacity: 1 !important;
+}
+
+/* Botón "Comenzar reto" en modo oscuro */
+body.high-contrast .quiz-btn,
+body.dark-mode .quiz-btn {
+    background: #ffd2ad !important;
+    color: #3d2200 !important;
+    border: 1px solid #ffb36b !important;
+    font-weight: 700 !important;
+}
+
+body.high-contrast .quiz-btn:hover,
+body.high-contrast .quiz-btn:focus-visible,
+body.dark-mode .quiz-btn:hover,
+body.dark-mode .quiz-btn:focus-visible {
+    background: #ffb36b !important;
+    color: #11131a !important;
+}
+
+/* ── Header coherent dark mode: main page icon ── */
+
+body.high-contrast .brand-icon,
+body.dark-mode .brand-icon {
+    background: #3d2200 !important;
+    color: #ff9f1a !important;
+    border: 1px solid rgba(255, 159, 26, 0.45) !important;
+}
+
+body.high-contrast .brand-icon i,
+body.dark-mode .brand-icon i {
+    color: inherit !important;
 }

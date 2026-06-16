@@ -3,17 +3,62 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="color-scheme" content="light" />
+        <meta name="color-scheme" content="light dark" />
         <title>Inicio - ODS 8</title>
+
+        <!-- Conexiones anticipadas: una sola por dominio externo importante -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Fraunces:wght@600;700&display=swap" rel="stylesheet" />
-        <link rel="stylesheet" href="styles.css" />
-        <script src="https://unpkg.com/@phosphor-icons/web" async></script>
-    </head>
+        <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+        <link rel="preconnect" href="https://images.unsplash.com" />
 
+        <!-- Google Fonts con carga no bloqueante -->
+        <link
+            rel="preload"
+            as="style"
+            href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Fraunces:wght@600;700&display=swap"
+            onload="this.onload=null;this.rel='stylesheet'" />
+
+        <noscript>
+            <link
+                rel="stylesheet"
+                href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Fraunces:wght@600;700&display=swap" />
+        </noscript>
+
+        <!-- CSS principal de la pantalla -->
+        <link rel="stylesheet" href="styles.css" />
+
+        <!-- Phosphor Icons optimizado: solo se cargan las familias usadas: regular y fill.
+             Se elimina el script completo para evitar cargar light/duotone y reducir CSS no usado. -->
+        <link
+            rel="preload"
+            as="font"
+            type="font/woff2"
+            href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/regular/Phosphor.woff2"
+            crossorigin />
+        <link
+            rel="preload"
+            as="font"
+            type="font/woff2"
+            href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/fill/Phosphor-Fill.woff2"
+            crossorigin />
+        <link
+            rel="preload"
+            as="style"
+            href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/regular/style.css"
+            onload="this.onload=null;this.rel='stylesheet'" />
+        <link
+            rel="preload"
+            as="style"
+            href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/fill/style.css"
+            onload="this.onload=null;this.rel='stylesheet'" />
+        <noscript>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/regular/style.css" />
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/fill/style.css" />
+        </noscript>
+    </head>
     <body>
-        <div class="app" role="application" aria-label="Inicio ODS 8">
+        <div class="app" aria-label="Inicio ODS 8">
             <header class="app-header">
                 <div class="brand">
                     <div class="brand-icon" aria-hidden="true">
@@ -24,7 +69,7 @@
                         <span class="brand-subtitle">ODS 8: TRABAJO DECENTE</span>
                     </div>
                 </div>
-                <button class="icon-button" type="button" aria-label="Notificaciones">
+                <button class="icon-button" id="notif-bell" type="button" aria-label="Notificaciones" aria-haspopup="dialog" aria-controls="notif-panel" aria-expanded="false">
                     <i class="ph ph-bell" aria-hidden="true"></i>
                     <span class="notif-dot" aria-hidden="true"></span>
                 </button>
@@ -43,7 +88,7 @@
                         <div class="trend-actions">
                             <span class="live-chip"><span class="live-dot"></span>DATOS EN VIVO</span>
                             <button type="button" class="icon-button expand-chart-btn" aria-label="Ampliar gráfico" aria-expanded="false" style="align-self: flex-end; margin-top: 6px;">
-                                <i class="ph ph-arrows-out"></i>
+                                <i class="ph ph-arrows-out" aria-hidden="true"></i>
                             </button>
                         </div>
                     </div>
@@ -54,12 +99,62 @@
                             <path class="chart-line" d="M0,96 C35,88 62,88 92,95 C128,103 146,88 172,64 C199,42 226,42 252,72 C273,96 293,106 320,47" />
                             
                             <!-- Puntos interactivos, accesibles por teclado (tabindex="0") -->
-                            <circle cx="0" cy="96" r="6" class="chart-point interactive" tabindex="0" aria-label="1 de Junio: 15.2%" data-date="1 Jun" data-value="15.2%"/>
-                            <circle cx="92" cy="95" r="6" class="chart-point interactive" tabindex="0" aria-label="3 de Junio: 15.0%" data-date="3 Jun" data-value="15.0%"/>
-                            <circle cx="172" cy="64" r="6" class="chart-point interactive" tabindex="0" aria-label="5 de Junio: 14.1%" data-date="5 Jun" data-value="14.1%"/>
-                            <circle cx="252" cy="72" r="6" class="chart-point interactive" tabindex="0" aria-label="10 de Junio: 14.5%" data-date="10 Jun" data-value="14.5%"/>
-                            <circle cx="320" cy="47" r="6" class="chart-point interactive" tabindex="0" aria-label="13 de Junio: 12.8%" data-date="13 Jun" data-value="12.8%"/>
-                        </svg>
+                            <circle
+                                cx="0"
+                                cy="96"
+                                r="6"
+                                class="chart-point interactive"
+                                tabindex="0"
+                                role="button"
+                                aria-label="Consultar dato del 1 de junio: 15.2% de desempleo juvenil"
+                                data-date="1 Jun"
+                                data-value="15.2%" />
+
+                            <circle
+                                cx="92"
+                                cy="95"
+                                r="6"
+                                class="chart-point interactive"
+                                tabindex="0"
+                                role="button"
+                                aria-label="Consultar dato del 3 de junio: 15.0% de desempleo juvenil"
+                                data-date="3 Jun"
+                                data-value="15.0%" />
+
+                            <circle
+                                cx="172"
+                                cy="64"
+                                r="6"
+                                class="chart-point interactive"
+                                tabindex="0"
+                                role="button"
+                                aria-label="Consultar dato del 5 de junio: 14.1% de desempleo juvenil"
+                                data-date="5 Jun"
+                                data-value="14.1%" />
+
+                            <circle
+                                cx="252"
+                                cy="72"
+                                r="6"
+                                class="chart-point interactive"
+                                tabindex="0"
+                                role="button"
+                                aria-label="Consultar dato del 10 de junio: 14.5% de desempleo juvenil"
+                                data-date="10 Jun"
+                                data-value="14.5%" />
+
+                            <circle
+                                cx="320"
+                                cy="47"
+                                r="6"
+                                class="chart-point interactive"
+                                tabindex="0"
+                                role="button"
+                                aria-label="Consultar dato del 13 de junio: 12.8% de desempleo juvenil"
+                                data-date="13 Jun"
+                                data-value="12.8%" />                        
+                        
+                    </svg>
                         <div class="chart-tooltip" role="tooltip" aria-hidden="true" id="chart-tooltip"></div>
                     </div>
 
@@ -97,7 +192,21 @@
                     </div>
 
                     <article class="story-card">
-                        <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=1200&q=80" alt="Joven profesional sonriendo" class="story-image" />
+                        <img
+                        class="story-image"
+                        src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=640&q=70"
+                        srcset="
+                            https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=430&q=70 430w,
+                            https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=640&q=70 640w,
+                            https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=860&q=70 860w
+                        "
+                        sizes="429px"
+                        alt="Joven profesional sonriendo en un entorno urbano tras conseguir su primer empleo como desarrolladora"
+                        width="429"
+                        height="643"
+                        loading="eager"
+                        fetchpriority="high"
+                        decoding="async">
                         <div class="story-overlay"></div>
 
                         <div class="story-head">
@@ -105,8 +214,13 @@
                             <button class="share-btn" type="button" aria-label="Compartir historia de Sarah en redes sociales"><i class="ph ph-share-network" aria-hidden="true"></i></button>
                         </div>
 
-                        <button class="play-button" type="button" aria-label="Reproducir historia de Sarah" aria-describedby="story-access-note"><i class="ph-fill ph-play" aria-hidden="true"></i></button>
-
+                        <button
+                            class="play-button"
+                            type="button"
+                            aria-label="Reproducir historia de Sarah"
+                            aria-describedby="story-access-note-1">
+                            <i class="ph-fill ph-play" aria-hidden="true"></i>
+                        </button>
                         <div class="story-actions" aria-label="Interacciones de la historia">
                             <button type="button" class="side-action" aria-label="Me gusta esta historia" aria-pressed="false"><i class="ph ph-heart" aria-hidden="true"></i></button>
                             <span class="side-count">12.4k</span>
@@ -118,7 +232,9 @@
 
                         <div class="story-info">
                             <h4>Cómo conseguí mi primer trabajo como desarrolladora usando IA.</h4>
-                            <p id="story-access-note-1" class="sr-only">Este contenido audiovisual dispone de una alternativa textual y resumen accesible.</p>
+                            <p id="story-access-note-1" class="sr-only">
+                                Este contenido audiovisual dispone de una alternativa textual y resumen accesible.
+                            </p>                            
                             <button class="story-alt-btn" type="button" aria-haspopup="dialog" aria-controls="media-alt-panel">Leer transcripción y alternativas</button>
                             <div class="tags">
                                 <span>#EMPLEO</span>
@@ -129,16 +245,33 @@
                     </article>
 
                     <article class="story-card">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1200&q=80" alt="Hombre trabajador sonriendo con laptop" class="story-image" />
+                        <img
+                        class="story-image"
+                        src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=640&q=70"
+                        srcset="
+                            https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=430&q=70 430w,
+                            https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=640&q=70 640w,
+                            https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=860&q=70 860w
+                        "
+                        sizes="429px"
+                        alt="Hombre profesional que representa una transición laboral hacia el desarrollo web"
+                        width="429"
+                        height="643"
+                        loading="lazy"
+                        decoding="async">
                         <div class="story-overlay"></div>
 
                         <div class="story-head">
                             <span class="creator"><span class="creator-avatar" aria-hidden="true"></span>@carlos_tech</span>
                             <button class="share-btn" type="button" aria-label="Compartir historia de Carlos en redes sociales"><i class="ph ph-share-network" aria-hidden="true"></i></button>
                         </div>
-
-                        <button class="play-button" type="button" aria-label="Reproducir historia de Carlos" aria-describedby="story-access-note"><i class="ph-fill ph-play" aria-hidden="true"></i></button>
-
+                        <button
+                            class="play-button"
+                            type="button"
+                            aria-label="Reproducir historia de Carlos"
+                            aria-describedby="story-access-note-2">
+                            <i class="ph-fill ph-play" aria-hidden="true"></i>
+                        </button>
                         <div class="story-actions" aria-label="Interacciones de la historia">
                             <button type="button" class="side-action" aria-label="Me gusta esta historia" aria-pressed="false"><i class="ph ph-heart" aria-hidden="true"></i></button>
                             <span class="side-count">8.2k</span>
@@ -150,7 +283,9 @@
 
                         <div class="story-info">
                             <h4>De la fábrica al desarrollo web: mi transición laboral a los 42 años.</h4>
-                            <p id="story-access-note-2" class="sr-only">Este contenido audiovisual dispone de una alternativa textual y resumen accesible.</p>
+                            <p id="story-access-note-2" class="sr-only">
+                                Este contenido audiovisual dispone de una alternativa textual y resumen accesible.
+                            </p>                            
                             <button class="story-alt-btn" type="button" aria-haspopup="dialog" aria-controls="media-alt-panel">Leer transcripción y alternativas</button>
                             <div class="tags">
                                 <span>#FORMACIÓN</span>
@@ -161,7 +296,20 @@
                     </article>
 
                     <article class="story-card">
-                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=1200&q=80" alt="Mujer emprendedora frente a su negocio" class="story-image" />
+                        <img
+                        class="story-image"
+                        src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=640&q=70"
+                        srcset="
+                            https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=430&q=70 430w,
+                            https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=640&q=70 640w,
+                            https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=860&q=70 860w
+                        "
+                        sizes="429px"
+                        alt="Mujer emprendedora que representa la creación de una startup con condiciones laborales responsables"
+                        width="429"
+                        height="643"
+                        loading="lazy"
+                        decoding="async">
                         <div class="story-overlay"></div>
 
                         <div class="story-head">
@@ -169,8 +317,15 @@
                             <button class="share-btn" type="button" aria-label="Compartir historia de Lucía en redes sociales"><i class="ph ph-share-network" aria-hidden="true"></i></button>
                         </div>
 
-                        <button class="play-button" type="button" aria-label="Reproducir historia de Lucía" aria-describedby="story-access-note"><i class="ph-fill ph-play" aria-hidden="true"></i></button>
-
+                        <button
+                            class="play-button"
+                            type="button"
+                            aria-label="Reproducir historia de Lucía"
+                            aria-describedby="story-access-note-3">
+                            <i class="ph-fill ph-play" aria-hidden="true"></i>
+                        </button>
+                        
+                    
                         <div class="story-actions" aria-label="Interacciones de la historia">
                             <button type="button" class="side-action" aria-label="Me gusta esta historia" aria-pressed="false"><i class="ph ph-heart" aria-hidden="true"></i></button>
                             <span class="side-count">9.8k</span>
@@ -182,7 +337,9 @@
 
                         <div class="story-info">
                             <h4>Crear mi startup respetando los derechos de mis empleados fue rentable.</h4>
-                            <p id="story-access-note-3" class="sr-only">Este contenido audiovisual dispone de una alternativa textual y resumen accesible.</p>
+                            <p id="story-access-note-3" class="sr-only">
+                                Este contenido audiovisual dispone de una alternativa textual y resumen accesible.
+                            </p>                            
                             <button class="story-alt-btn" type="button" aria-haspopup="dialog" aria-controls="media-alt-panel">Leer transcripción y alternativas</button>
                             <div class="tags">
                                 <span>#EMPRENDIMIENTO</span>
@@ -267,7 +424,7 @@
             <div class="media-alt-card" role="document">
                 <div class="media-alt-header">
                     <h3 id="media-alt-title">Alternativa accesible del contenido</h3>
-                    <button class="icon-button" type="button" id="media-alt-close" aria-label="Cerrar alternativas de contenido">✕</button>
+                    <button class="icon-button" type="button" id="media-alt-close" aria-label="Cerrar alternativas de contenido"><i class="ph ph-x" aria-hidden="true"></i></button>
                 </div>
                 <div class="media-alt-content">
                     <h4>Transcripción breve</h4>
@@ -321,7 +478,7 @@
 
         <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-        <script src="../global-a11y.js"></script>
-        <script src="app.js"></script>
+        <script src="../global-a11y.js" defer></script>
+        <script src="app.js" defer></script>    
     </body>
 </html>

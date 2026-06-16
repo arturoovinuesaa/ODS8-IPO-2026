@@ -4,26 +4,59 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="color-scheme" content="light" />
-        <title>Acción - El Conocimiento es Poder</title>
+        <title>Aprende - ODS 8</title>
+
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Fraunces:wght@600;700&display=swap" rel="stylesheet" />
+        <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+
+        <link
+            rel="preload"
+            as="style"
+            href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Fraunces:wght@600;700&display=swap"
+            onload="this.onload=null;this.rel='stylesheet'" />
+
+        <link
+            rel="preload"
+            as="style"
+            href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/regular/style.css"
+            onload="this.onload=null;this.rel='stylesheet'" />
+
+        <link
+            rel="preload"
+            as="style"
+            href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/fill/style.css"
+            onload="this.onload=null;this.rel='stylesheet'" />
+
+        <noscript>
+            <link
+                rel="stylesheet"
+                href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Fraunces:wght@600;700&display=swap" />
+            <link
+                rel="stylesheet"
+                href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/regular/style.css" />
+            <link
+                rel="stylesheet"
+                href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/fill/style.css" />
+        </noscript>
+
         <link rel="stylesheet" href="styles.css" />
-        <script src="https://unpkg.com/@phosphor-icons/web" async></script>
     </head>
 
     <body>
-        <div class="app" role="application" aria-label="Sección de Aprendizaje">
+        <div class="app" aria-label="Sección de Aprendizaje">
             <!-- Header -->
             <header class="app-header">
                 <div class="brand">
-                    <div class="brand-icon" aria-hidden="true"><i class="ph ph-book-open" style="font-size: 20px; color: var(--accent);"></i></div>
+                    <div class="brand-icon" aria-hidden="true">
+                        <i class="ph ph-book-open" aria-hidden="true"></i>
+                    </div>
                     <div class="brand-text">
                         <span class="brand-title">Aprende</span>
-                        <span class="brand-subtitle">Recursos educativos y oportunidades</span>
+                        <span class="brand-subtitle">ODS 8: RECURSOS</span>
                     </div>
                 </div>
-                <button class="icon-button" type="button" aria-label="Notificaciones" id="notif-bell">
+                <button class="icon-button" type="button" aria-label="Notificaciones" id="notif-bell" aria-haspopup="dialog" aria-controls="notif-panel" aria-expanded="false">
                     <i class="ph ph-bell" aria-hidden="true"></i>
                     <span class="notif-dot" aria-hidden="true"></span>
                 </button>
@@ -65,7 +98,7 @@
                 <!-- Anti-Exploitation Guide -->
                 <section class="card alert-card" aria-labelledby="alert-title">
                     <div class="alert-icon" aria-hidden="true">
-                        <i class="ph ph-shield-check" style="font-size: 24px; color: #ff7b00;"></i>
+                        <i class="ph ph-shield-check" aria-hidden="true"></i>
                     </div>
                     <div class="alert-body">
                         <h3 id="alert-title">Tus Derechos Laborales</h3>
@@ -83,17 +116,17 @@
                 <section class="section" aria-labelledby="jobs-title">
                     <div class="section-header">
                         <div class="jobs-header-left">
-                            <i class="ph ph-briefcase" aria-hidden="true" style="font-size: 20px; color: var(--accent);"></i>
+                            <i class="ph ph-briefcase jobs-icon" aria-hidden="true"></i>
                             <h3 id="jobs-title">Oportunidades Laborales</h3>
                         </div>
                         <button class="link" type="button" id="jobs-view-all">Ver todo</button>
                     </div>
 
-                    <div class="card jobs-card">
+                    <div class="card jobs-card" role="list" aria-label="Vista previa de oportunidades laborales">
                         <!-- Job 1 -->
                         <div class="job-item" role="listitem">
-                            <div class="job-avatar" style="background: #fce4ec">
-                                <span style="color: #1a1a1a; font-weight: 700">B</span>
+                            <div class="job-avatar job-avatar-safe">
+                                <span class="job-initial">B</span>
                             </div>
                             <div class="job-info">
                                 <h4 data-i18n="jobs.job1.title">Barista</h4>
@@ -109,8 +142,8 @@
 
                         <!-- Job 2 -->
                         <div class="job-item" role="listitem">
-                            <div class="job-avatar" style="background: #fff3e0">
-                                <span style="color: #1a1a1a; font-weight: 700">D</span>
+                            <div class="job-avatar job-avatar-safe">
+                                <span class="job-initial">R</span>
                             </div>
                             <div class="job-info">
                                 <h4 data-i18n="jobs.job2.title">Repartidor</h4>
@@ -133,7 +166,7 @@
 
             <!-- Bottom Navigation -->
             <nav class="bottom-nav" aria-label="Principal">
-                <a href="../main-page/index.html" class="nav-item" aria-label="Inicio" style="text-decoration: none">
+                <a href="../main-page/index.html" class="nav-item" aria-label="Inicio">
                     <span class="nav-icon" aria-hidden="true"><i class="ph ph-house"></i></span>
                     <span class="nav-label">Inicio</span>
                 </a>
@@ -141,50 +174,64 @@
                     <span class="nav-icon" aria-hidden="true"><i class="ph ph-book-open"></i></span>
                     <span class="nav-label">Aprende</span>
                 </button>
-                <a href="../challenges/index.html" class="nav-item" aria-label="Retos" style="text-decoration: none">
+                <a href="../challenges/index.html" class="nav-item" aria-label="Retos">
                     <span class="nav-icon" aria-hidden="true"><i class="ph ph-medal"></i></span>
                     <span class="nav-label">Retos</span>
                 </a>
-                <a href="../profile/index.html" class="nav-item" aria-label="Perfil" style="text-decoration: none">
+                <a href="../profile/index.html" class="nav-item" aria-label="Perfil">
                     <span class="nav-icon" aria-hidden="true"><i class="ph ph-user"></i></span>
                     <span class="nav-label">Perfil</span>
                 </a>
             </nav>
         </div>
 
-        <div class="toast" id="toast" role="status" aria-live="polite"></div>
+        <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 
         <div class="notif-panel" id="notif-panel" hidden role="dialog" aria-modal="true" aria-label="Notificaciones">
             <div class="notif-backdrop" id="notif-backdrop"></div>
             <div class="notif-card">
                 <div class="notif-header">
                     <h3>Notificaciones</h3>
-                    <button class="icon-button" type="button" id="notif-close" aria-label="Cerrar notificaciones">✕</button>
+                    <button class="icon-button" type="button" id="notif-close" aria-label="Cerrar notificaciones">
+                        <i class="ph ph-x" aria-hidden="true"></i>
+                    </button>
                 </div>
+
                 <ul class="notif-list" role="list">
                     <li class="notif-item unread" role="listitem">
-                        <span class="notif-icon" aria-hidden="true">🏆</span>
+                        <span class="notif-icon" aria-hidden="true">
+                            <i class="ph-fill ph-trophy"></i>
+                        </span>
                         <div class="notif-body">
                             <p class="notif-text">¡Nuevo reto semanal disponible! <strong>Green CEO</strong></p>
                             <p class="notif-time">Hace 2 horas</p>
                         </div>
                     </li>
+
                     <li class="notif-item" role="listitem">
-                        <span class="notif-icon" aria-hidden="true">⭐</span>
+                        <span class="notif-icon" aria-hidden="true">
+                            <i class="ph-fill ph-star"></i>
+                        </span>
                         <div class="notif-body">
                             <p class="notif-text">Conseguiste la insignia <strong>Primera trivia</strong></p>
                             <p class="notif-time">Hace 1 día</p>
                         </div>
                     </li>
+
                     <li class="notif-item" role="listitem">
-                        <span class="notif-icon" aria-hidden="true">📢</span>
+                        <span class="notif-icon" aria-hidden="true">
+                            <i class="ph-fill ph-megaphone"></i>
+                        </span>
                         <div class="notif-body">
                             <p class="notif-text">Tu amigo Alex también juega al ODS 8</p>
                             <p class="notif-time">Hace 3 días</p>
                         </div>
                     </li>
+
                     <li class="notif-item" role="listitem">
-                        <span class="notif-icon" aria-hidden="true">🎯</span>
+                        <span class="notif-icon" aria-hidden="true">
+                            <i class="ph-fill ph-target"></i>
+                        </span>
                         <div class="notif-body">
                             <p class="notif-text">Completaste 3 trivias seguidas esta semana</p>
                             <p class="notif-time">Hace 5 días</p>
@@ -200,7 +247,7 @@
             <div class="modal-card" role="document">
                 <div class="modal-header">
                     <h2 id="guides-title">Guías de Derechos</h2>
-                    <button class="icon-button" type="button" aria-label="Cerrar" data-close="guides">✕</button>
+                    <button class="icon-button" type="button" aria-label="Cerrar" data-close="guides"><i class="ph ph-x" aria-hidden="true"></i></button>
                 </div>
                 <div class="modal-content">
                     <div class="guide-item">
@@ -229,7 +276,7 @@
             <div class="modal-card" role="document">
                 <div class="modal-header">
                     <h2 id="help-title">Recursos de Ayuda</h2>
-                    <button class="icon-button" type="button" aria-label="Cerrar" data-close="help">✕</button>
+                    <button class="icon-button" type="button" aria-label="Cerrar" data-close="help"><i class="ph ph-x" aria-hidden="true"></i></button>
                 </div>
                 <div class="modal-content">
                     <div class="help-item">
@@ -254,7 +301,7 @@
             <div class="modal-card" role="document">
                 <div class="modal-header">
                     <h2 id="easy-read-title">Versión en Lectura Fácil</h2>
-                    <button class="icon-button" type="button" aria-label="Cerrar" data-close="easy-read">✕</button>
+                    <button class="icon-button" type="button" aria-label="Cerrar" data-close="easy-read"><i class="ph ph-x" aria-hidden="true"></i></button>
                 </div>
                 <div class="modal-content easy-read-content">
                     <h3>¿Qué es la explotación laboral?</h3>
@@ -284,7 +331,7 @@
             <div class="modal-card" role="document">
                 <div class="modal-header">
                     <h2 id="jobs-modal-title">Bolsa de Empleo Segura</h2>
-                    <button class="icon-button" type="button" aria-label="Cerrar" data-close="jobs">✕</button>
+                    <button class="icon-button" type="button" aria-label="Cerrar" data-close="jobs"><i class="ph ph-x" aria-hidden="true"></i></button>
                 </div>
                 <div class="modal-content jobs-list" role="list" id="jobs-list">
                     <!-- Empleos dinamicamente insertados por JS -->
@@ -297,14 +344,14 @@
             <div class="modal-backdrop" data-close="job-detail"></div>
             <div class="modal-card" role="document">
                 <div class="modal-header">
-                    <h2 id="job-detail-title" style="margin: 0">Detalles del Empleo</h2>
-                    <button class="icon-button" type="button" aria-label="Cerrar" data-close="job-detail">✕</button>
+                    <h2 id="job-detail-title">Detalles del Empleo</h2>
+                    <button class="icon-button" type="button" aria-label="Cerrar" data-close="job-detail"><i class="ph ph-x" aria-hidden="true"></i></button>
                 </div>
                 <div class="modal-content" id="job-detail-content">
                     <!-- Detalles dinamicos -->
                 </div>
-                <div style="padding: 20px; border-top: 1px solid #f0f0f0; display: flex; gap: 12px">
-                    <button class="cta" style="flex: 1" id="apply-job-btn" type="button">Solicitar</button>
+                <div class="job-detail-actions">
+                    <button class="cta apply-job-cta" id="apply-job-btn" type="button">Solicitar</button>
                     <button
                         class="text-alt-link"
                         type="button"
@@ -319,7 +366,7 @@
             </div>
         </div>
 
-        <script src="../global-a11y.js"></script>
-        <script src="app.js"></script>
+        <script src="../global-a11y.js" defer></script>
+        <script src="app.js" defer></script>    
     </body>
 </html>
