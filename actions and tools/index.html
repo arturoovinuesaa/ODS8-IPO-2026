@@ -241,6 +241,67 @@
             </div>
         </div>
 
+
+        <!-- Modal: Cursos Certificados -->
+        <div class="modal" id="courses-modal" role="dialog" aria-modal="true" aria-labelledby="courses-title" hidden>
+            <div class="modal-backdrop" data-close="courses"></div>
+            <div class="modal-card" role="document">
+                <div class="modal-header">
+                    <h2 id="courses-title">Cursos Certificados</h2>
+                    <button class="icon-button" type="button" aria-label="Cerrar" data-close="courses"><i class="ph ph-x" aria-hidden="true"></i></button>
+                </div>
+                <div class="modal-content">
+                    <p class="muted">
+                        Recursos orientativos para mejorar la empleabilidad y desarrollar competencias relacionadas con el ODS 8.
+                    </p>
+
+                    <div class="guide-item">
+                        <h3>🤖 Inteligencia artificial aplicada al empleo</h3>
+                        <p>
+                            Aprende a utilizar herramientas de IA para preparar un CV, practicar entrevistas, resumir ofertas de empleo y organizar tu búsqueda laboral.
+                        </p>
+                        <p>
+                            <a href="https://www.coursera.org/courses?query=artificial%20intelligence" target="_blank" rel="noopener noreferrer">
+                                Buscar cursos de inteligencia artificial en Coursera
+                            </a>
+                        </p>
+                    </div>
+
+                    <div class="guide-item">
+                        <h3>💻 Programación y competencias digitales</h3>
+                        <p>
+                            La formación digital puede abrir oportunidades en desarrollo web, análisis de datos, automatización y soporte técnico.
+                            Empieza por cursos introductorios si no tienes experiencia previa.
+                        </p>
+                        <p>
+                            <a href="https://www.edx.org/learn/computer-programming" target="_blank" rel="noopener noreferrer">
+                                Buscar cursos de programación en edX
+                            </a>
+                        </p>
+                    </div>
+
+                    <div class="guide-item">
+                        <h3>🧭 Liderazgo y comunicación profesional</h3>
+                        <p>
+                            Además de conocimientos técnicos, las empresas valoran la comunicación, la organización, el trabajo en equipo y la capacidad de adaptación.
+                        </p>
+                        <p>
+                            <a href="https://www.linkedin.com/learning/" target="_blank" rel="noopener noreferrer">
+                                Explorar cursos en LinkedIn Learning
+                            </a>
+                        </p>
+                    </div>
+
+                    <div class="guide-item">
+                        <h3>✅ Consejo de uso</h3>
+                        <p>
+                            Antes de elegir un curso, revisa duración, nivel, idioma, coste, certificado y si encaja con el tipo de empleo que buscas.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Modal: Guías de Derechos -->
         <div class="modal" id="guides-modal" role="dialog" aria-modal="true" aria-labelledby="guides-title" hidden>
             <div class="modal-backdrop" data-close="guides"></div>
@@ -250,21 +311,123 @@
                     <button class="icon-button" type="button" aria-label="Cerrar" data-close="guides"><i class="ph ph-x" aria-hidden="true"></i></button>
                 </div>
                 <div class="modal-content">
+                    <p class="muted">
+                        Información orientativa basada en fuentes oficiales. No sustituye el asesoramiento de un profesional, sindicato, representante legal o Inspección de Trabajo.
+                    </p>
+
                     <div class="guide-item">
-                        <h3>💰 Salario Mínimo</h3>
-                        <p>El salario mínimo interprofesional (SMI) en España es la cantidad mínima que un empleador debe pagar por hora trabajada. Se actualiza anualmente.</p>
+                        <h3>⚖️ Tus derechos básicos</h3>
+                        <p>
+                            En España, el trabajo es un derecho reconocido por la Constitución. Tienes derecho a trabajar, elegir profesión u oficio,
+                            promocionar a través del trabajo y recibir una remuneración suficiente para tus necesidades y las de tu familia.
+                            Además, no puede haber discriminación por razón de sexo.
+                        </p>
+                        <p>
+                            <a href="https://www.boe.es/buscar/act.php?id=BOE-A-1978-31229" target="_blank" rel="noopener noreferrer">
+                                Consultar la Constitución Española en el BOE
+                            </a>
+                        </p>
                     </div>
+
                     <div class="guide-item">
-                        <h3>⏰ Horario de Trabajo</h3>
-                        <p>En España, la jornada máxima es de 40 horas semanales. Tu empleador debe respetar descansos de 12 horas entre jornadas.</p>
+                        <h3>💰 Salario y nómina</h3>
+                        <p>
+                            Tu salario debe respetar, como mínimo, el Salario Mínimo Interprofesional vigente y las condiciones que marque tu convenio colectivo.
+                            La empresa debe pagarte de forma puntual y entregarte una nómina o justificante donde se vean los conceptos salariales,
+                            las deducciones y la cantidad final que recibes.
+                        </p>
+                        <p>
+                            Si cobras menos de lo acordado, si te pagan tarde de forma repetida o si no te entregan nómina, es una señal de alerta.
+                        </p>
+                        <p>
+                            <a href="https://www.boe.es/buscar/act.php?id=BOE-A-2026-3815" target="_blank" rel="noopener noreferrer">
+                                Consultar el Salario Mínimo Interprofesional vigente en el BOE
+                            </a>
+                        </p>
                     </div>
+
                     <div class="guide-item">
-                        <h3>📜 Tipos de Contrato</h3>
-                        <p>Los contratos pueden ser indefinidos, temporales, prácticas o aprendizaje. Revisa bien el tuyo antes de firmar.</p>
+                        <h3>⏰ Jornada, horas extra y descansos</h3>
+                        <p>
+                            La jornada laboral debe respetar los límites legales y lo pactado en tu contrato o convenio colectivo. Como regla general,
+                            el Estatuto de los Trabajadores fija una jornada máxima ordinaria de 40 horas semanales de trabajo efectivo en cómputo anual.
+                            También deben respetarse los descansos entre jornadas, los descansos semanales y las pausas que correspondan.
+                        </p>
+                        <p>
+                            Trabajar muchas más horas de las acordadas, no registrar la jornada o no poder descansar puede indicar un problema laboral.
+                        </p>
+                        <p>
+                            <a href="https://www.boe.es/buscar/act.php?id=BOE-A-2015-11430" target="_blank" rel="noopener noreferrer">
+                                Consultar el Estatuto de los Trabajadores en el BOE
+                            </a>
+                        </p>
                     </div>
+
                     <div class="guide-item">
-                        <h3>🏖️ Vacaciones y Descansos</h3>
-                        <p>Tienes derecho a 30 días de vacaciones pagadas anuales como mínimo. También derecho a descanso semanal.</p>
+                        <h3>📄 Contrato de trabajo</h3>
+                        <p>
+                            Antes de aceptar un empleo, revisa el tipo de contrato, la jornada, el salario, el periodo de prueba, el lugar de trabajo
+                            y el convenio colectivo aplicable. Aunque algunos contratos pueden ser verbales, siempre es recomendable pedir la información
+                            por escrito para evitar dudas.
+                        </p>
+                        <p>
+                            Si no sabes qué contrato tienes, si no aparece tu jornada real o si te piden firmar algo que no entiendes,
+                            pide una explicación antes de firmar.
+                        </p>
+                    </div>
+
+                    <div class="guide-item">
+                        <h3>🏖️ Vacaciones, permisos y conciliación</h3>
+                        <p>
+                            Las vacaciones son un derecho, no un favor de la empresa. El Estatuto de los Trabajadores establece un mínimo de 30 días naturales
+                            de vacaciones al año, aunque tu convenio colectivo puede mejorar esta condición. También existen permisos relacionados con
+                            situaciones familiares, médicas o personales.
+                        </p>
+                        <p>
+                            El calendario de vacaciones debe conocerse con antelación. Si la empresa cambia tus vacaciones sin justificación o no te deja disfrutarlas,
+                            conviene pedir información o asesoramiento.
+                        </p>
+                    </div>
+
+                    <div class="guide-item">
+                        <h3>🤝 Convenio colectivo</h3>
+                        <p>
+                            El convenio colectivo es una norma acordada entre representantes de trabajadores y empresas. Sirve para concretar condiciones como salario,
+                            jornada, descansos, clasificación profesional, permisos, pluses o vacaciones dentro de un sector, empresa o territorio.
+                        </p>
+                        <p>
+                            Tu contrato no debería empeorar los derechos mínimos reconocidos por la ley o por el convenio que te corresponda.
+                            Para saber qué convenio puede aplicarse, puedes buscarlo por actividad, provincia o código CNAE.
+                        </p>
+                        <p>
+                            <a href="https://ccncc.mites.gob.es/mapa-de-negociacion-colectiva" target="_blank" rel="noopener noreferrer">
+                                Buscar convenio en el Mapa de Negociación Colectiva
+                            </a>
+                        </p>
+                    </div>
+
+                    <div class="guide-item">
+                        <h3>🚩 Señales de alerta</h3>
+                        <p>
+                            Algunas señales de posible abuso laboral son: no tener contrato o información clara, cobrar menos de lo pactado,
+                            trabajar horas no pagadas, no poder descansar, recibir amenazas, sufrir humillaciones o no tener medidas básicas de seguridad.
+                        </p>
+                        <p>
+                            Si detectas alguna de estas situaciones, guarda pruebas: contrato, nóminas, mensajes, horarios, cuadrantes, correos o capturas.
+                        </p>
+                    </div>
+
+                    <div class="guide-item">
+                        <h3>🆘 Qué hacer si tienes un problema</h3>
+                        <p>
+                            Primero intenta pedir la información por escrito a la empresa. Si el problema continúa, puedes acudir a representantes legales,
+                            sindicatos, servicios públicos de orientación o a la Inspección de Trabajo y Seguridad Social.
+                        </p>
+                        <p>
+                            <a href="https://www.mites.gob.es/itss/web/index.html" target="_blank" rel="noopener noreferrer">
+                                Consultar la Inspección de Trabajo y Seguridad Social
+                            </a>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -304,23 +467,97 @@
                     <button class="icon-button" type="button" aria-label="Cerrar" data-close="easy-read"><i class="ph ph-x" aria-hidden="true"></i></button>
                 </div>
                 <div class="modal-content easy-read-content">
-                    <h3>¿Qué es la explotación laboral?</h3>
-                    <p>Es cuando un jefe te trata mal en el trabajo.</p>
+                    <h3>Tus derechos laborales en palabras sencillas</h3>
+                    <p>
+                        Cuando trabajas, tienes derechos. La empresa debe respetar tu salario, tu horario, tus descansos y tu seguridad.
+                    </p>
 
-                    <h3>Señales de alerta:</h3>
+                    <h3>1. Tu salario</h3>
+                    <p>
+                        Deben pagarte lo que pone en tu contrato o en tu convenio. Nunca deberían pagarte por debajo del mínimo legal.
+                    </p>
+                    <p>
+                        También tienes derecho a recibir una nómina o justificante de pago.
+                    </p>
+
+                    <h3>2. Tu horario</h3>
+                    <p>
+                        Tu horario debe estar claro. Si trabajas más horas de las acordadas, esas horas deben estar justificadas y pagarse
+                        o compensarse según corresponda.
+                    </p>
+                    <p>
+                        También tienes derecho a descansar entre jornadas y durante la semana.
+                    </p>
+
+                    <h3>3. Tu contrato</h3>
+                    <p>
+                        Antes de firmar, lee bien el contrato. Debe quedar claro qué trabajo haces, cuánto cobras, cuántas horas trabajas
+                        y qué convenio se aplica.
+                    </p>
+                    <p>
+                        Si no entiendes algo, pide ayuda antes de firmar.
+                    </p>
+
+                    <h3>4. Tus vacaciones</h3>
+                    <p>
+                        Las vacaciones son un derecho. Como mínimo, la ley reconoce 30 días naturales al año.
+                        Tu convenio puede mejorar esta cantidad.
+                    </p>
+
+                    <h3>5. Tu convenio colectivo</h3>
+                    <p>
+                        El convenio colectivo es un documento que explica derechos concretos de tu sector. Por ejemplo: salario,
+                        descansos, permisos, pluses o vacaciones.
+                    </p>
+                    <p>
+                        Puedes buscar tu convenio en páginas oficiales del Ministerio de Trabajo.
+                    </p>
+
+                    <h3>Señales de alerta</h3>
                     <ul>
-                        <li>✓ Te pagan menos de lo acordado</li>
-                        <li>✓ Te obligan a trabajar más horas</li>
-                        <li>✓ No tienes contrato escrito</li>
-                        <li>✓ Te insultan o humillan</li>
-                        <li>✓ No te dejan descansar</li>
+                        <li>Te pagan menos de lo acordado.</li>
+                        <li>No te dan nómina.</li>
+                        <li>Trabajas muchas horas y no te las pagan.</li>
+                        <li>No te dejan descansar.</li>
+                        <li>No tienes información clara sobre tu contrato.</li>
+                        <li>Te amenazan, insultan o humillan.</li>
+                        <li>No hay medidas de seguridad en el trabajo.</li>
                     </ul>
 
                     <h3>¿Qué puedes hacer?</h3>
-                    <p><strong>1.</strong> Habla con tu jefe o un compañero de confianza.</p>
-                    <p><strong>2.</strong> Guarda pruebas (mensajes, contratos).</p>
-                    <p><strong>3.</strong> Llama a un sindicato o a la Inspección de Trabajo.</p>
-                    <p><strong>4.</strong> No estás solo. Existen leyes que te protegen.</p>
+                    <p><strong>1.</strong> Guarda pruebas: contrato, nóminas, mensajes, horarios o capturas.</p>
+                    <p><strong>2.</strong> Pide la información por escrito.</p>
+                    <p><strong>3.</strong> Habla con una persona de confianza, representante laboral o sindicato.</p>
+                    <p><strong>4.</strong> Si el problema continúa, puedes acudir a la Inspección de Trabajo.</p>
+
+                    <h3>Fuentes oficiales</h3>
+                    <ul>
+                        <li>
+                            <a href="https://www.boe.es/buscar/act.php?id=BOE-A-1978-31229" target="_blank" rel="noopener noreferrer">
+                                Constitución Española
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.boe.es/buscar/act.php?id=BOE-A-2015-11430" target="_blank" rel="noopener noreferrer">
+                                Estatuto de los Trabajadores
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.boe.es/buscar/act.php?id=BOE-A-2026-3815" target="_blank" rel="noopener noreferrer">
+                                Salario Mínimo Interprofesional vigente
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://ccncc.mites.gob.es/mapa-de-negociacion-colectiva" target="_blank" rel="noopener noreferrer">
+                                Mapa de Negociación Colectiva
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.mites.gob.es/itss/web/index.html" target="_blank" rel="noopener noreferrer">
+                                Inspección de Trabajo y Seguridad Social
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>

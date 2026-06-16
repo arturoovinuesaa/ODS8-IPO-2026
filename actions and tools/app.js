@@ -16,6 +16,7 @@ const jobsViewAllBtn = document.getElementById("jobs-view-all");
 const easyReadBtn = document.getElementById("open-easy-read");
 
 // Modals
+const coursesModal = document.getElementById("courses-modal");
 const guidesModal = document.getElementById("guides-modal");
 const helpModal = document.getElementById("help-modal");
 const easyReadModal = document.getElementById("easy-read-modal");
@@ -144,14 +145,14 @@ function closeModal(modal, returnFocus = null) {
 /* ── Button handlers ── */
 if (exploreBtn) {
     exploreBtn.addEventListener("click", () => {
-        openModal(guidesModal);
-        showToast("Abriendo guías de aprendizaje...");
+        openModal(coursesModal);
+        showToast("Abriendo cursos certificados...");
     });
 }
 
 if (helpBtn) {
     helpBtn.addEventListener("click", () => {
-        openModal(helpModal);
+        openModal(guidesModal);
         showToast("Abriendo guía de derechos laborales...");
     });
 }
@@ -168,7 +169,8 @@ modalCloseButtons.forEach((btn) => {
     btn.addEventListener("click", (e) => {
         const closeType = btn.getAttribute("data-close");
         let modal = null;
-        if (closeType === "guides") modal = guidesModal;
+        if (closeType === "courses") modal = coursesModal;
+        else if (closeType === "guides") modal = guidesModal;
         else if (closeType === "help") modal = helpModal;
         else if (closeType === "easy-read") modal = easyReadModal;
         else if (closeType === "jobs") modal = jobsModal;
@@ -265,7 +267,8 @@ function showJobDetail(jobId) {
 // Close modal on Escape
 document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
-        if (!guidesModal.hidden) closeModal(guidesModal, exploreBtn);
+        if (!coursesModal.hidden) closeModal(coursesModal, exploreBtn);
+        if (!guidesModal.hidden) closeModal(guidesModal, helpBtn);
         if (!helpModal.hidden) closeModal(helpModal, helpBtn);
         if (!easyReadModal.hidden) closeModal(easyReadModal, easyReadBtn);
         if (!jobsModal.hidden) closeModal(jobsModal, jobsViewAllBtn);
