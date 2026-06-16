@@ -1104,7 +1104,7 @@ body.large-text {
 
 body.large-text .app,
 body.large-text .mobile-container {
-    padding-bottom: 120px;
+    padding-bottom: 0 !important;
 }
 
 body.large-text .profile-info h1 {
@@ -1178,4 +1178,27 @@ body.large-text .badge-item span {
 
 body.large-text .bottom-nav {
     padding: 12px 0 14px;
+}
+
+
+/* Corrección footer en modo texto grande */
+body.large-text .bottom-nav {
+    padding: 10px 0 12px !important;
+    min-height: 82px;
+    align-items: center;
+}
+
+body.large-text .nav-item {
+    padding: 6px 8px !important;
+    min-height: 56px;
+    gap: 4px;
+}
+
+body.large-text .nav-icon {
+    font-size: 21px;
+}
+
+body.large-text .nav-label {
+    font-size: 11px;
+    line-height: 1.1;
 }
