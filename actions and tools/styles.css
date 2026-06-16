@@ -573,10 +573,47 @@ body.high-contrast .link:hover {
 
 .job-item {
     display: grid;
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: auto 1fr auto auto;
     gap: 12px;
     align-items: center;
     padding: 12px 0;
+}
+
+.job-item-clickable {
+    border: none;
+    background: transparent;
+    text-align: left;
+    width: 100%;
+    cursor: pointer;
+    border-radius: 8px;
+    margin: 0 -8px;
+    padding: 12px 8px;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.job-item-clickable:hover {
+    background-color: var(--accent-soft);
+    transform: translateX(2px);
+}
+
+.job-item-clickable:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+}
+
+.job-item-clickable:active {
+    transform: scale(0.98);
+}
+
+.job-arrow {
+    color: #5e667a;
+    font-size: 18px;
+    opacity: 1;
+    transition: color 0.2s ease;
+}
+
+.job-item-clickable:hover .job-arrow {
+    color: #11131a;
 }
 
 .job-avatar {
@@ -926,10 +963,33 @@ body.high-contrast .nav-label {
     color: var(--ink);
 }
 
+.modal-header h3 {
+    margin: 4px 0 0 0;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--muted);
+}
+
 .modal-content {
     padding: 20px;
     display: grid;
     gap: 16px;
+}
+
+.job-detail-actions {
+    padding: 20px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    gap: 12px;
+    background: var(--bg);
+}
+
+.job-detail-actions .cta {
+    flex: 1;
+}
+
+.job-detail-actions .text-alt-link {
+    flex: 1;
 }
 
 .guide-item,
@@ -1194,6 +1254,10 @@ body.high-contrast .job-divider {
     background: #30363d;
 }
 
+body.high-contrast .job-item-clickable:hover {
+    background-color: #2d1800;
+}
+
 body.high-contrast .job-tag.verified {
     background: #0d2818;
     color: #4caf50;
@@ -1206,6 +1270,14 @@ body.high-contrast .job-tag.new {
 
 body.high-contrast .job-avatar span {
     color: #ffffff !important;
+}
+
+body.high-contrast .job-arrow {
+    color: #b8c2cf;
+}
+
+body.high-contrast .job-item-clickable:hover .job-arrow {
+    color: #f0f6fc;
 }
 
 body.high-contrast .job-avatar {
@@ -1517,21 +1589,28 @@ body.dark-mode .brand-subtitle {
     font-weight: 800 !important;
 }
 
-/* Botón Volver dentro del detalle de empleo.
-   Se diferencia del botón de Solicitar empleo con fondo oscuro. */
+/* Botón Volver dentro del detalle de empleo */
 #job-detail-modal .text-alt-link {
-    background: #11131a !important;
-    color: #ffffff !important;
-    border: 1px solid #11131a !important;
-    font-weight: 800 !important;
+    background: var(--card);
+    color: var(--ink);
+    border: 2px solid var(--border);
+    font-weight: 600;
+    box-shadow: none;
 }
 
-#job-detail-modal .text-alt-link:hover,
+#job-detail-modal .text-alt-link:hover {
+    background: var(--accent-soft);
+    border-color: var(--accent);
+    color: var(--ink);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
 #job-detail-modal .text-alt-link:focus-visible {
-    background: #2a2d38 !important;
-    color: #ffffff !important;
     outline: 2px solid var(--ring);
     outline-offset: 2px;
+    background: var(--accent-soft);
+    border-color: var(--accent);
 }
 
 /* Modo oscuro / alto contraste */
@@ -1570,39 +1649,16 @@ body.high-contrast #job-detail-modal span[style*="255, 243, 224"] {
 }
 
 body.high-contrast #job-detail-modal .text-alt-link {
-    background: #f3f6fa !important;
-    color: #11131a !important;
-    border-color: #f3f6fa !important;
+    background: var(--card);
+    color: var(--ink);
+    border: 2px solid #30363d;
 }
 
 body.high-contrast #job-detail-modal .text-alt-link:hover,
 body.high-contrast #job-detail-modal .text-alt-link:focus-visible {
-    background: #d0d8e4 !important;
-    color: #11131a !important;
-    outline: 2px solid #58a6ff;
+    background: #2d1800;
+    color: var(--ink);
+    border-color: var(--accent);
+    outline: 2px solid var(--ring);
     outline-offset: 2px;
-}
-
-/* Quitar aura naranja del botón Volver */
-#job-detail-modal .text-alt-link {
-    box-shadow: none !important;
-    filter: none !important;
-}
-
-/* Hover sin aura naranja */
-#job-detail-modal .text-alt-link:hover {
-    box-shadow: none !important;
-    filter: none !important;
-    background: #2a2d38 !important;
-    color: #ffffff !important;
-}
-
-/* Focus accesible, pero sin aura naranja */
-#job-detail-modal .text-alt-link:focus-visible {
-    box-shadow: none !important;
-    filter: none !important;
-    outline: 2px solid #11131a !important;
-    outline-offset: 3px !important;
-    background: #2a2d38 !important;
-    color: #ffffff !important;
 }

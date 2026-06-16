@@ -312,6 +312,17 @@ if (jobsViewAllBtn) {
     });
 }
 
+// Add click handlers to preview job items
+const previewJobItems = document.querySelectorAll(".job-item-clickable[data-job-id]");
+previewJobItems.forEach((item) => {
+    item.addEventListener("click", () => {
+        const jobId = parseInt(item.getAttribute("data-job-id"), 10);
+        if (jobId) {
+            showJobDetail(jobId);
+        }
+    });
+});
+
 function openNotifPanel() {
     notifPanel.hidden = false;
     setNotificationsExpanded(true);

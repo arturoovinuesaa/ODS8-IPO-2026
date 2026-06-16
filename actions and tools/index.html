@@ -119,12 +119,12 @@
                             <i class="ph ph-briefcase jobs-icon" aria-hidden="true"></i>
                             <h3 id="jobs-title">Oportunidades Laborales</h3>
                         </div>
-                        <button class="link" type="button" id="jobs-view-all">Ver todo</button>
+                        <button class="link" type="button" id="jobs-view-all">Mostrar todos los empleos</button>
                     </div>
 
                     <div class="card jobs-card" role="list" aria-label="Vista previa de oportunidades laborales">
                         <!-- Job 1 -->
-                        <div class="job-item" role="listitem">
+                        <button class="job-item job-item-clickable" role="listitem" type="button" data-job-id="1" aria-label="Ver detalles de Barista">
                             <div class="job-avatar job-avatar-safe">
                                 <span class="job-initial">B</span>
                             </div>
@@ -136,12 +136,13 @@
                                 <span class="job-salary">$18/hr</span>
                                 <span class="job-tag verified" data-i18n="jobs.verified">VERIFICADO</span>
                             </div>
-                        </div>
+                            <span class="job-arrow" aria-hidden="true">→</span>
+                        </button>
 
                         <div class="job-divider" aria-hidden="true"></div>
 
                         <!-- Job 2 -->
-                        <div class="job-item" role="listitem">
+                        <button class="job-item job-item-clickable" role="listitem" type="button" data-job-id="2" aria-label="Ver detalles de Repartidor">
                             <div class="job-avatar job-avatar-safe">
                                 <span class="job-initial">R</span>
                             </div>
@@ -153,7 +154,8 @@
                                 <span class="job-salary">$22/hr</span>
                                 <span class="job-tag new" data-i18n="jobs.new">NUEVO</span>
                             </div>
-                        </div>
+                            <span class="job-arrow" aria-hidden="true">→</span>
+                        </button>
                     </div>
                 </section>
 
@@ -567,7 +569,10 @@
             <div class="modal-backdrop" data-close="jobs"></div>
             <div class="modal-card" role="document">
                 <div class="modal-header">
-                    <h2 id="jobs-modal-title">Bolsa de Empleo Segura</h2>
+                    <div>
+                        <h2 id="jobs-modal-title">Bolsa de Empleo Segura</h2>
+                        <h3 id="jobs-modal-subtitle">Presione un empleo para ver los detalles</h3>
+                    </div>
                     <button class="icon-button" type="button" aria-label="Cerrar" data-close="jobs"><i class="ph ph-x" aria-hidden="true"></i></button>
                 </div>
                 <div class="modal-content jobs-list" role="list" id="jobs-list">

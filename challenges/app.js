@@ -21,11 +21,11 @@ const i18n = {
         "hero.description": "Equilibra beneficio y planeta en este simulador inmersivo.",
         "hero.cta": "Jugar ahora",
         "progress.label": "Tu progreso",
-        "progress.bonus": "+250 XP para Oro",
+        "progress.bonus": "+250 XP ",
         "progress.bonusClaimed": "XP añadida",
         "trivia.eyebrow": "Hora de trivia",
         "trivia.title": "Leyes laborales",
-        "trivia.viewAll": "Ver todo",
+        "trivia.viewAll": "leer leyes laborales",
         "trivia.question": "¿Cuál es el máximo legal de horas semanales sin horas extra?",
         "trivia.swipe": "Desliza para la siguiente pregunta",
         "trivia.counter": "Pregunta {current}/{total}",
@@ -747,6 +747,10 @@ bonusButton.addEventListener("click", () => {
     state.bonusClaimed = true;
     state.xpCurrent = Math.min(state.xpCurrent + 250, state.xpTotal);
     bonusButton.setAttribute("aria-pressed", "true");
+    bonusButton.disabled = true;
+    bonusButton.setAttribute("aria-disabled", "true");
+    bonusButton.style.cursor = "not-allowed";
+    bonusButton.style.opacity = "0.6";
     bonusButton.querySelector("span").textContent = i18n[state.locale]["progress.bonusClaimed"];
     updateProgress();
     showToast(i18n[state.locale]["progress.bonusClaimed"]);
